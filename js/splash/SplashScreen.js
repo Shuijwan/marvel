@@ -7,6 +7,7 @@ var React = require('react');
 var StyleSheet = require('StyleSheet');
 var Animated = require('Animated');
 var Image = require('Image');
+var Text = require('Text');
 var {connect} = require('react-redux');
 var View = require('View');
 
@@ -27,9 +28,13 @@ class SplashScreen extends React.Component {
       <Animated.Image style={[styles.container, this.fadeIn(0, 0)]}
         source={require('./img/splash-background.jpg')}>
         <View style={{flex:1}}/>
-        <Animated.Image style={[styles.logo, this.fadeIn(2500, 20)]}
-        source={require('./img/marvel-logo.png')}
-        />
+        <View>
+          <Animated.Image style={[styles.marvellogo, this.fadeIn(2500, 20)]}
+          source={require('./img/marvel-logo.png')}/>
+          <Animated.Text style={[styles.marvelinfo,this.fadeIn(2500, 20)]}>
+          Data provided by Marvel. © 2014 Marvel.
+          </Animated.Text>
+        </View>
       </Animated.Image>
     );
   }
@@ -63,10 +68,17 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
-  logo: {
+  marvellogo: {
     alignSelf: 'center',
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 10,
+  },
+
+  marvelinfo: {
+    marginBottom: 24,
+    fontSize: 12,
+    color: '#032250',
+    textAlign: 'center',
   },
 });
 
