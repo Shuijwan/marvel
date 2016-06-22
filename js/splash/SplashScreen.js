@@ -11,16 +11,31 @@ var Text = require('Text');
 var {connect} = require('react-redux');
 var View = require('View');
 
+var { enterMainPage } = require('../actions');
+
 class SplashScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       anim : new Animated.Value(0),
     };
+
+    this.onAnimatedCompleted = this.onAnimatedCompleted.bind(this);
   }
 
   componentDidMount() {
     Animated.timing(this.state.anim, {toValue:3000, duration:3000}).start();
+    this.state.anim.addListener(this.onAnimatedCompleted);
+  }
+
+  componentWillUnmount() {
+    this.state.anim.removeAllListeners();
+  }
+
+  onAnimatedCompleted(value) {
+    if(value.value === 3000) {
+      this.props.dispatch(enterMainPage());
+    }
   }
 
   render() {

@@ -21,7 +21,9 @@ var logger = createLogger({
 var createMarvelStore = applyMiddleware(logger)(createStore);
 
 function configureStore(onComplete: ?() => void) {
-  const store = autoRehydrate()(createMarvelStore)(reducers);
+  //TODO: should not persist store mainentry.inSplash
+  const store = createMarvelStore(reducers);
+  // const store = autoRehydrate()(createMarvelStore)(reducers);
   persistStore(store, {storage: AsyncStorage}, onComplete);
   if(isDebuggingInChrome) {
     window.store = store;

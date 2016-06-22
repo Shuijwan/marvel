@@ -18,7 +18,6 @@ var {connect} = require('react-redux');
 var MarvelApp = React.createClass({
   componentDidMount: function() {
     AppState.addEventListener('change', this.handleAppStateChange);
-    // this.props.dispatch(loadComics());
   },
 
   componentWillUnmount: function() {
@@ -43,7 +42,7 @@ var MarvelApp = React.createClass({
           backgroundColor="rgba(0,0,0,0.2)"
           barStyle="light-content"
           />
-        // <MarvelNavigator/>
+
       </View>
     );
   },
@@ -58,7 +57,7 @@ var styles = StyleSheet.create({
 
 function select(store) {
   return {
-    inSplash: true,
+    inSplash: store.mainentry.inSplash,
   };
 }
 
