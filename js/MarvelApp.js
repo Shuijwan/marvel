@@ -8,7 +8,7 @@
 var React = require('react');
 var AppState = require('AppState');
 var SplashScreen = require('./splash/SplashScreen');
-// var MarvelNavigator = require('./MarvelNavigator');
+var MarvelNavigator = require('./MarvelNavigator');
 var StatusBar = require('StatusBar');
 var StyleSheet = require('StyleSheet');
 var View = require('View');
@@ -42,7 +42,7 @@ var MarvelApp = React.createClass({
           backgroundColor="rgba(0,0,0,0.2)"
           barStyle="light-content"
           />
-
+        <MarvelNavigator />
       </View>
     );
   },

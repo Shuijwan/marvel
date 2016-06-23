@@ -6,13 +6,13 @@
 
 import type {Action} from '../actions/types';
 
-export type Tab = 'comics' | 'story';
+export type Tab = 'popular' | 'characters' | 'comics' | 'events' | 'series' | 'stories';
 
 type State = {
   tab: Tab;
 };
 
-const initialState: State = {tab: 'comics'};
+const initialState: State = {tab: 'popular'};
 
 function navigation(state: State = initialState, action: Action): State {
   if (action.type === 'SWITCH_TAB') {
