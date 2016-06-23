@@ -81,9 +81,10 @@ var styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   icon: {
-    width: 30,
-    height: 30,
+    width: 32,
+    height: 32,
     marginRight: 20,
+    padding: 3,
   },
   title: {
     flex: 1,

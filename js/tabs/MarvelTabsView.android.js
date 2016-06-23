@@ -59,7 +59,7 @@ class MarvelTabsView extends React.Component {
   renderNavigationView() {
     return (
       <View style={styles.navigation}>
-        <Image style={styles.head} source={require('./img/head-1.jpg')}/>
+        <Image style={styles.head} source={require('./img/head-2.png')}/>
         <MenuItem title="POPULAR"
           selected={this.props.tab === 'popular'}
           icon={require('./img/1.png')}
