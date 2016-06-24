@@ -14,6 +14,7 @@ var StyleSheet = require('StyleSheet');
 var View = require('View');
 
 var {connect} = require('react-redux');
+var { getAllCharacters } = require('./actions');
 
 var MarvelApp = React.createClass({
   componentDidMount: function() {
@@ -26,7 +27,7 @@ var MarvelApp = React.createClass({
 
   handleAppStateChange: function(appState) {
     if(appState == 'active') {
-
+      this.props.dispatch(getAllCharacters(0, 1));
     }
   },
 

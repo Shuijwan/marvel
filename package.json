@@ -11,6 +11,7 @@
     "react-redux": "~4.4.5",
     "redux": "~3.2.1",
     "redux-logger": "~2.5.0",
-    "redux-persist": "~1.5.0"
+    "redux-persist": "~1.5.0",
+    "crypto-js":"~3.1.6"
   }
 }
