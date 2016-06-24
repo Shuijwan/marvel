@@ -12,6 +12,7 @@ var StyleSheet = require('StyleSheet');
 var ToolbarAndroid = require('ToolbarAndroid');
 var Image = require('Image');
 var Dimensions = require('Dimensions');
+import Hyperlink from 'react-native-hyperlink';
 
 const imgwidth = Dimensions.get('window').width;
 const shield = require('../img/shieldcolor.png');
@@ -48,16 +49,20 @@ class AboutContentView extends React.Component {
         </Text>
         <F8Touchable style={styles.item}>
           <View style={{flexDirection:'row'}}>
-          <Text style={styles.itemtext}>
-            Github: https://github.com/Shuijwan/marvel
-          </Text>
+            <Hyperlink linkStyle={{color:'#2980b9'}} onPress={(url) => alert(url)}>
+              <Text style={styles.itemtext}>
+                  Github: https://github.com/Shuijwan/marvel
+              </Text>
+            </Hyperlink>
           </View>
         </F8Touchable>
         <F8Touchable style={styles.item}>
-        <View style={{flexDirection:'row'}}>
-          <Text style={styles.itemtext}>
-            Marvel: http://developer.marvel.com/
-          </Text>
+          <View style={{flexDirection:'row'}}>
+            <Hyperlink linkStyle={{color:'#2980b9'}} onPress={(url) => alert(url)}>
+              <Text style={styles.itemtext}>
+                  Marvel: http://developer.marvel.com/
+              </Text>
+            </Hyperlink>
           </View>
         </F8Touchable>
         <View style={{flex:1}}/>
