@@ -21,6 +21,17 @@ class MarvelAPI {
         global.LOG(error);
       }
   }
+
+  async getCharacterByName(name: string) {
+    var generalParam = getMarvelRequestParam();
+    var request = `${serverUrl}characters?${param}&name=${name}`;
+    try {
+      let response = await fetch(request);
+      const result = await response.json();
+    } catch(error) {
+      global.LOG(error);
+    }
+  }
 }
 
 module.exports = MarvelAPI;

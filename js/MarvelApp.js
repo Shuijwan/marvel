@@ -19,6 +19,7 @@ var { getAllCharacters } = require('./actions');
 var MarvelApp = React.createClass({
   componentDidMount: function() {
     AppState.addEventListener('change', this.handleAppStateChange);
+    this.props.dispatch(getAllCharacters(0, 1));
   },
 
   componentWillUnmount: function() {
@@ -27,7 +28,7 @@ var MarvelApp = React.createClass({
 
   handleAppStateChange: function(appState) {
     if(appState == 'active') {
-      this.props.dispatch(getAllCharacters(0, 1));
+
     }
   },
 
