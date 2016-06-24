@@ -24,6 +24,8 @@ class CharactersContentView extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={{backgroundColor:'rgb(18, 134, 117)', height: 24}}
+        />
         <ToolbarAndroid
           title='CHARACTERS'
           titleColor='white'
@@ -31,10 +33,7 @@ class CharactersContentView extends React.Component {
           onIconClicked= {this.handleIconClicked}
           style={styles.toolbar}
         />
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Text>{rowData}</Text>}
-        />
+
         <ActionButton
           buttonColor="rgb(18, 134, 117)"
           onPress={() => { this.handleSearchIconClicked()}}
@@ -59,7 +58,6 @@ CharactersContentView.contextTypes = {
 var styles = StyleSheet.create({
   container:{
     flex: 1,
-    paddingTop: 24,
     flexDirection: 'column',
     backgroundColor: 'transparent',
   },

@@ -29,7 +29,9 @@ class AboutContentView extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1, flexDirection:'column'}}>
+      <View style={{flex:1, flexDirection:'column',}}>
+        <View style={{backgroundColor:'rgb(168, 31, 26)', height: 24}}
+        />
         <ToolbarAndroid
           navIcon={shield}
           title='About'
