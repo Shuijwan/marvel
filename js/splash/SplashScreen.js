@@ -44,9 +44,9 @@ class SplashScreen extends React.Component {
         source={require('./img/splash_background.png')}>
         <View style={{flex:1}}/>
         <View>
-          <Animated.Image style={[styles.marvellogo, this.fadeIn(2500, 20)]}
+          <Animated.Image style={[styles.marvellogo, this.fadeIn(2000, 20)]}
           source={require('./img/marvel_logo.png')}/>
-          <Animated.Text style={[styles.marvelinfo,this.fadeIn(2500, 20)]}>
+          <Animated.Text style={[styles.marvelinfo,this.fadeIn(2000, 20)]}>
           Data provided by Marvel. © 2016 Marvel.
           </Animated.Text>
         </View>
