@@ -41,7 +41,7 @@ class SplashScreen extends React.Component {
   render() {
     return (
       <Animated.Image style={[styles.container, this.fadeIn(0, 0)]}
-        source={require('./img/splash_background.jpg')}>
+        source={require('./img/splash_background.png')}>
         <View style={{flex:1}}/>
         <View>
           <Animated.Image style={[styles.marvellogo, this.fadeIn(2500, 20)]}
