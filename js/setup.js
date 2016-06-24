@@ -15,16 +15,11 @@ function setup() : React.Component {
     constructor() {
       super();
       this.state = {
-        isLoading:true,
-        store: configureStore(() => this.setState({isLoading:false})),
+        store: configureStore(),
       };
     }
 
     render() {
-      if(this.state.isLoading) {
-        return null;
-      }
-
       return (
       <Provider store={this.state.store}>
           <MarvelApp />
