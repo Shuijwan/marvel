@@ -10,7 +10,9 @@ var ToolbarAndroid = require('ToolbarAndroid');
 var StyleSheet = require('StyleSheet');
 var TextInput = require('TextInput');
 var Image = require('Image');
-const batman = require('../img/batman_color.png');
+import ActionButton from 'react-native-action-button';
+
+const batman = require('../img/batmancolor.png');
 
 class CharactersContentView extends React.Component {
 
@@ -23,32 +25,30 @@ class CharactersContentView extends React.Component {
     return (
       <View style={styles.container}>
         <ToolbarAndroid
-          navIcon={batman}
           title='CHARACTERS'
           titleColor='white'
+          navIcon={batman}
           onIconClicked= {this.handleIconClicked}
           style={styles.toolbar}
         />
-        <View style={{flex:1}}/>
-        <View style={{flexDirection:'row', alignSelf:'center'}}>
-          <Image
-            source={require('../img/batman_color.png')}
-            style={{width:35, height:35, alignItems:'center', marginRight: 8, marginTop:6}}
-          />
-          <TextInput
-            placeholder='Search the character here'
-            multiline= {false}
-            onChangeText={this.onSearchCharacterChanged}
-            style={styles.searchbox}
-          />
-        </View>
-        <View style={{flex:2}}/>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => <Text>{rowData}</Text>}
+        />
+        <ActionButton
+          buttonColor="rgb(18, 134, 117)"
+          onPress={() => { this.handleSearchIconClicked()}}
+        />
       </View>
     );
   }
 
   handleIconClicked() {
     this.context.openDrawer();
+  }
+
+  handleSearchIconClicked() {
+
   }
 }
 
@@ -61,7 +61,7 @@ var styles = StyleSheet.create({
     flex: 1,
     paddingTop: 24,
     flexDirection: 'column',
-    backgroundColor: 'transparent',//green
+    backgroundColor: 'transparent',
   },
   toolbar: {
     height: 56,

@@ -14,7 +14,7 @@ var Image = require('Image');
 var Dimensions = require('Dimensions');
 
 const imgwidth = Dimensions.get('window').width;
-const shield = require('../img/shield_color.png');
+const shield = require('../img/shieldcolor.png');
 
 class AboutContentView extends React.Component {
 
@@ -79,7 +79,7 @@ var styles = StyleSheet.create({
 
   description: {
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 40,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign:'center'
