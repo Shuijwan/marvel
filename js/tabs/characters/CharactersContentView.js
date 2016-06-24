@@ -10,6 +10,7 @@ var ToolbarAndroid = require('ToolbarAndroid');
 var StyleSheet = require('StyleSheet');
 var TextInput = require('TextInput');
 var Image = require('Image');
+const batman = require('../img/batman_color.png');
 
 class CharactersContentView extends React.Component {
 
@@ -22,7 +23,7 @@ class CharactersContentView extends React.Component {
     return (
       <View style={styles.container}>
         <ToolbarAndroid
-          navIcon={require('../img/1color.png')}
+          navIcon={batman}
           title='CHARACTERS'
           titleColor='white'
           onIconClicked= {this.handleIconClicked}
@@ -31,7 +32,7 @@ class CharactersContentView extends React.Component {
         <View style={{flex:1}}/>
         <View style={{flexDirection:'row', alignSelf:'center'}}>
           <Image
-            source={require('../img/1color.png')}
+            source={require('../img/batman_color.png')}
             style={{width:35, height:35, alignItems:'center', marginRight: 8, marginTop:6}}
           />
           <TextInput
@@ -60,10 +61,11 @@ var styles = StyleSheet.create({
     flex: 1,
     paddingTop: 24,
     flexDirection: 'column',
+    backgroundColor: 'transparent',//green
   },
   toolbar: {
     height: 56,
-    backgroundColor: 'rgb(168, 31, 26)',//red
+    backgroundColor: 'rgb(18, 134, 117)',//green
     elevation: 2,
     borderRightWidth: 1,
     marginRight: -1,

@@ -59,12 +59,12 @@ class MarvelTabsView extends React.Component {
         <Image style={styles.head} source={require('./img/head_2.png')}/>
         <MenuItem title="CHARACTERS"
           selected={this.props.tab === 'characters'}
-          icon={require('./img/1.png')}
+          icon={require('./img/batman.png')}
           onPress={this.onTabSelected.bind(this, 'characters')}
           />
         <MenuItem title="ABOUT"
           selected={this.props.tab === 'about'}
-          icon={require('./img/2.png')}
+          icon={require('./img/shield.png')}
           onPress={this.onTabSelected.bind(this, 'about')}
           />
         <View style={{flex:1}} />
