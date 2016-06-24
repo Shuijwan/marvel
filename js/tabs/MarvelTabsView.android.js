@@ -19,6 +19,7 @@ var View = require('View');
 var MenuItem = require('./MenuItem');
 var Text = require('Text');
 var Image = require('Image');
+var MarvelInfoView = require('MarvelInfoView');
 
 var {connect} = require('react-redux');
 var {switchTab} = require('../actions');
@@ -70,30 +71,9 @@ class MarvelTabsView extends React.Component {
           icon={require('./img/2.png')}
           onPress={this.onTabSelected.bind(this, 'characters')}
           />
-        <MenuItem title="COMICS"
-          selected={this.props.tab === 'comics'}
-          icon={require('./img/3.png')}
-          onPress={this.onTabSelected.bind(this, 'comics')}
-          />
-        <MenuItem title="EVENTS"
-          selected={this.props.tab === 'events'}
-          icon={require('./img/4.png')}
-          onPress={this.onTabSelected.bind(this, 'events')}
-          />
-        <MenuItem title="SERIES"
-          selected={this.props.tab === 'series'}
-          icon={require('./img/5.png')}
-          onPress={this.onTabSelected.bind(this, 'series')}
-          />
-        <MenuItem title="STORIES"
-          selected={this.props.tab === 'stories'}
-          icon={require('./img/6.png')}
-          onPress={this.onTabSelected.bind(this, 'stories')}
-          />
+        
         <View style={{flex:1}} />
-        <Text style={styles.marvelinfo}>
-          Data provided by Marvel. © 2014 Marvel.
-        </Text>
+        <MarvelInfoView />
       </View>
     );
   }
@@ -172,13 +152,6 @@ var styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white'
-  },
-
-  marvelinfo: {
-    marginBottom: 24,
-    fontSize: 12,
-    color: '#032250',
-    textAlign: 'center',
   },
 });
 

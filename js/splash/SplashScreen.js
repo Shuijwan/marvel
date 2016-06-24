@@ -47,7 +47,7 @@ class SplashScreen extends React.Component {
           <Animated.Image style={[styles.marvellogo, this.fadeIn(2500, 20)]}
           source={require('./img/marvel-logo.png')}/>
           <Animated.Text style={[styles.marvelinfo,this.fadeIn(2500, 20)]}>
-          Data provided by Marvel. © 2014 Marvel.
+          Data provided by Marvel. © 2016 Marvel.
           </Animated.Text>
         </View>
       </Animated.Image>
