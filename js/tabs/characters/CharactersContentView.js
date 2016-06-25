@@ -35,15 +35,14 @@ class CharactersContentView extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <View style={{backgroundColor:'rgb(18, 134, 117)', height: 24}}
+        <View style={{backgroundColor:'rgb(18, 134, 117)', height: 25}}
         />
         <ToolbarAndroid
           title='CHARACTERS'
           titleColor='white'
-          navIcon={batman}
-          onIconClicked= {this.handleIconClicked}
           style={styles.toolbar}
-        />
+          navIcon={batman}
+          onIconClicked= {this.handleIconClicked}/>
         <ListView
           style={{flex:1, width: undefined, height: undefined}}
           dataSource={ds}
@@ -58,10 +57,15 @@ class CharactersContentView extends React.Component {
     );
   }
 
+  handleCharacterClicked(selectedItem: Character) {
+    this.props.navigator.push({ character: selectedItem });
+  }
+
   renderRow(rowData: Character, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
       return (
         <TouchableHighlight  underlayColor='rgba(255,255,255, 0.2)' style={{backgroundColor:'rgb(244,245,246)'}} onPress={() => {
             highlightRow(sectionID, rowID);
+            this.handleCharacterClicked(rowData);
           }}>
             <View style={styles.row}>
               <Image style={styles.thumb} source={{uri: rowData.thumbnail}} />

@@ -11,6 +11,7 @@ var StyleSheet = require('StyleSheet');
 var Navigator = require('Navigator');
 var { connect } = require('react-redux');
 var MarvelTabsView = require('MarvelTabsView');
+var CharacterDetailView = require('./tabs/characters/CharacterDetailView');
 
 var MarvelNavigator = React.createClass({
   _backHandlers: ([]: Array<() => boolean>),
@@ -75,6 +76,11 @@ var MarvelNavigator = React.createClass({
   },
 
   renderScene: function(route, navigator) {
+    if(route.character) {
+      return (
+        <CharacterDetailView navigator={navigator} character={route.character}/>
+      );
+    }
     return (
       <MarvelTabsView navigator={navigator}/>
     );
