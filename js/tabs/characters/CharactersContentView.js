@@ -26,7 +26,6 @@ class CharactersContentView extends React.Component {
     super(props);
     this.handleIconClicked = this.handleIconClicked.bind(this);
     this.renderRow = this.renderRow.bind(this);
-    this.renderSeperator = this.renderSeperator.bind(this);
   }
 
   render() {
@@ -49,7 +48,6 @@ class CharactersContentView extends React.Component {
           dataSource={ds}
           renderRow={this.renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          renderSeparator={this.renderSeperator}
         />
         <ActionButton
           buttonColor="rgb(18, 134, 117)"
@@ -59,20 +57,9 @@ class CharactersContentView extends React.Component {
     );
   }
 
-  renderSeperator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
-      return (
-        <View
-          style={{
-            height: adjacentRowHighlighted ? 4 : 1,
-            backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
-          }}
-        />
-      );
-    }
-
   renderRow(rowData: Character, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) {
       return (
-        <TouchableHighlight  onPress={() => {
+        <TouchableHighlight  underlayColor='rgba(255,255,255, 0.2)' style={{backgroundColor:'rgb(244,245,246)'}} onPress={() => {
             highlightRow(sectionID, rowID);
           }}>
             <View style={styles.row}>
@@ -81,7 +68,7 @@ class CharactersContentView extends React.Component {
                 <Text style={styles.title}>
                   {rowData.name}
                 </Text>
-                <Text style={styles.text}>
+                <Text numberOfLines={2} style={styles.text}>
                   {rowData.description}
                 </Text>
               </View>
@@ -126,19 +113,30 @@ var styles = StyleSheet.create({
   },
 
   row: {
-    paddingLeft: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 5,
+    marginBottom: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
     height: 100,
     width: undefined,
     flexDirection: 'row',
+    backgroundColor:'white',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 1,
+    elevation: 2,
   },
 
   thumb: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: undefined,
     alignItems: 'center',
     resizeMode:Image.resizeMode.contain,
     marginRight: 10,
   },
+
   title: {
     marginTop: 15,
     fontSize: 18,
@@ -147,7 +145,8 @@ var styles = StyleSheet.create({
 
   text: {
     fontSize: 16,
-    flex: 1,
+    paddingRight: 5,
+    width: 240,//TODO, how to let Text autofit the view width?
   }
 });
 
