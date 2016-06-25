@@ -15,5 +15,5 @@ function md5(ts: string) {
 export function getMarvelRequestParam() {
   var ts = new Date().getTime();
   var md5value = md5(ts);
-  return `${ts}&apikey=${PublicKey}&hash=${md5value}`;
+  return `ts=${ts}&apikey=${PublicKey}&hash=${md5value}`;
 }

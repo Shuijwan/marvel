@@ -5,16 +5,21 @@
 'use strict';
 
 import type {Action} from '../actions/types';
+import type {Character} from '../marvelapi/model';
 
-type State = {
-  result: string;
+export type State = {
+  popularcharacters: Array<Character>;
+  character: Character;
 };
 
 const initialState: State = {result: null};
 
 function marvel(state: State = initialState, action: Action): State {
-  if (action.type === 'GET_ALL_CHARACTERS') {
-    return {...state, result: action.data};
+  if (action.type === 'GET_POPULAR_CHARACTERS') {
+    return {...state, popularcharacters: action.data};
+  }
+  if(action.type === 'GET_CHARACTER_BY_NAME') {
+    return {...state, character: action.data};
   }
   return state;
 }

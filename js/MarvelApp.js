@@ -14,12 +14,12 @@ var StyleSheet = require('StyleSheet');
 var View = require('View');
 
 var {connect} = require('react-redux');
-var { getAllCharacters } = require('./actions');
+var { getPopularCharacters, getCharacterByName } = require('./actions');
 
 var MarvelApp = React.createClass({
   componentDidMount: function() {
     AppState.addEventListener('change', this.handleAppStateChange);
-    this.props.dispatch(getAllCharacters(0, 1));
+    this.props.dispatch(getPopularCharacters());
   },
 
   componentWillUnmount: function() {

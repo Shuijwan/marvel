@@ -8,12 +8,22 @@ import MarvelAPI from '../marvelapi/MarvelAPI';
 
 const marvel = new MarvelAPI();
 
-async function getAllCharacters(offset: number, limit:number): Action {
-  const result = await marvel.getAllCharacters(offset, limit);
+async function getPopularCharacters(): Action {
+  const result = await marvel.getPopularCharacters();
   return {
-    type: 'GET_ALL_CHARACTERS',
+    type: 'GET_POPULAR_CHARACTERS',
     data: result
   };
 }
 
-module.exports = { getAllCharacters };
+async function getCharacterByName(name: string) {
+  const result = await marvel.getCharacterByName(name);
+  return {
+    type: 'GET_CHARACTER_BY_NAME',
+    data: result
+  };
+}
+
+
+
+module.exports = { getPopularCharacters, getCharacterByName };
