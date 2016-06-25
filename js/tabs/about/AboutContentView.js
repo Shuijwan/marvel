@@ -11,12 +11,12 @@ var F8Touchable = require('F8Touchable');
 var StyleSheet = require('StyleSheet');
 var ToolbarAndroid = require('ToolbarAndroid');
 var Image = require('Image');
-var Dimensions = require('Dimensions');
+var {windowWidth} = require('constant');
 var Linking = require('Linking');
 
 import Hyperlink from 'react-native-hyperlink';
 
-const imgwidth = Dimensions.get('window').width;
+
 const shield = require('../img/shieldcolor.png');
 
 class AboutContentView extends React.Component {
@@ -44,7 +44,7 @@ class AboutContentView extends React.Component {
         />
         <Image
           source={require('../img/about_marvel_logo.png')}
-          style={{width:imgwidth, height:200}}
+          style={{width:windowWidth, height:200}}
         />
         <Text style={styles.description}>
           This is a React Native App based on coolest Marvel API. You can search the Marvel Heros here.

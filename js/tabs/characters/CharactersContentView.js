@@ -14,6 +14,7 @@ var {connect} = require('react-redux');
 var ListView = require('ListView');
 var TouchableHighlight = require('TouchableHighlight');
 var RecyclerViewBackedScrollView = require('RecyclerViewBackedScrollView');
+var {windowWidth} = require('constant');
 
 import ActionButton from 'react-native-action-button';
 
@@ -146,7 +147,7 @@ var styles = StyleSheet.create({
   text: {
     fontSize: 16,
     paddingRight: 5,
-    width: 240,//TODO, how to let Text autofit the view width?
+    width: windowWidth-130,//TODO, how to let Text autofit the view width?
   }
 });
 
