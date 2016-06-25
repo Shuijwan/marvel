@@ -1,7 +1,7 @@
 # Marvel
 
-一个基于Marvle动漫API的React Native App. 当前只支持Android，后续添加IOS支持。
-想要自己运行app的话，到http://developer.marvel.com/上申请API key，添加到env.js中.
+一个在F8基础上照猫画虎的漫威React Native App. 当前只支持Android，后续添加IOS支持。
+想要自己运行app的话，到http://developer.marvel.com/ 上申请API key，添加到env.js中.
 
 # Screenshot
 ![alt tag](./screenshot/1.png)
