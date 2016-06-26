@@ -87,12 +87,14 @@ class CharacterDetailView extends React.Component {
       var contentlayout = content.map((item, index) => {
             var generalParam = getMarvelRequestParam();
             var url = `${item.resourceURI}?${generalParam}`;
-            return (<Text style={styles.bodyItem} onPress={() => Linking.openURL(url)} > { item.name } </Text>);
+            var key = `${item.name}-item-${index}`;
+            return (<Text key={key} style={styles.bodyItem} onPress={() => Linking.openURL(url)} > { item.name } </Text>);
         }
       );
+      var key = `${item.name}-item-${index}`;
 
       return (
-        <View style={{flexDirection: 'column', marginVertical: 10}}>
+        <View key={key} style={{flexDirection: 'column', marginVertical: 10}}>
           <Text style={styles.bodyTitle}>
             {item}
           </Text>
@@ -115,7 +117,7 @@ var styles = StyleSheet.create({
   container:{
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgb(244,245,246)',
   },
   toolbar: {
     height: 56,

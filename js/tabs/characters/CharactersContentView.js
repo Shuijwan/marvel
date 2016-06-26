@@ -18,7 +18,7 @@ var {windowWidth} = require('constant');
 
 import ActionButton from 'react-native-action-button';
 
-var batman = require('../img/batman_color.png');
+var batman = require('../img/batmancolor.png');
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class CharactersContentView extends React.Component {
