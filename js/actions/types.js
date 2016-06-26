@@ -11,4 +11,5 @@ export type Action =
 | { type: 'MAIN_ENTRY' }
 | { type: 'GET_POPULAR_CHARACTERS', data: Array<Character> }
 | { type: 'GET_CHARACTER_BY_NAME', data: Character }
+| { type: 'GET_CHARACTER_DETAIL', data: string }
   ;

@@ -11,12 +11,17 @@ var ToolbarAndroid = require('ToolbarAndroid');
 var Image = require('Image');
 var {windowWidth} = require('constant');
 var Text = require('Text');
+var Linking = require('Linking');
+var ScrollView = require('ScrollView');
+var {getMarvelRequestParam} = require('../../marvelapi/Util');
 
+import Hyperlink from 'react-native-hyperlink';
 
 class CharacterDetailView extends React.Component {
   constructor(props) {
     super(props);
     this.handleIconClicked = this.handleIconClicked.bind(this);
+
   }
 
   render() {
@@ -40,14 +45,69 @@ class CharacterDetailView extends React.Component {
             <Text numberOfLines={3} style={styles.description}>
               {this.props.character.description}
             </Text>
+            <View style={{flex: 1}}/>
+            <Hyperlink linkStyle={{color:'#2980b9'}} onPress={(url) => Linking.openURL(url)}>
+              <Text style={styles.wiki}>
+                  {'More: '+ this.props.character.wiki}
+              </Text>
+            </Hyperlink>
           </View>
         </View>
+        <ScrollView style={{width: undefined, height: undefined}}>
+        <View style={styles.body}>
+          {this.renderBody()}
+        </View>
+        </ScrollView>
       </View>
     );
   }
 
   handleIconClicked() {
     this.props.navigator.pop();
+  }
+
+  renderBody() {
+    var body= new Array('Comics', 'Events', 'Series', 'Stories');
+    var bodyLayout = body.map((item, index) => {
+      var content;
+      switch(index) {
+        case 0:
+          content = this.props.character.comics;
+          break;
+        case 1:
+          content = this.props.character.events;
+          break;
+        case 2:
+          content = this.props.character.series;
+          break;
+        case 3:
+          content = this.props.character.stories;
+          break;
+      }
+      var contentlayout = content.map((item, index) => {
+            var generalParam = getMarvelRequestParam();
+            var url = `${item.resourceURI}?${generalParam}`;
+            return (<Text style={styles.bodyItem} onPress={() => Linking.openURL(url)} > { item.name } </Text>);
+        }
+      );
+
+      return (
+        <View style={{flexDirection: 'column', marginVertical: 10}}>
+          <Text style={styles.bodyTitle}>
+            {item}
+          </Text>
+          <View style={{flexDirection: 'column'}} >
+          {contentlayout}
+          </View>
+        </View>
+      );
+    });
+
+    return (
+      <View style={{flexDirection:'column'}}>
+      {bodyLayout}
+      </View>
+    );
   }
 }
 
@@ -71,7 +131,7 @@ var styles = StyleSheet.create({
     marginBottom: 5,
     paddingLeft: 5,
     paddingRight: 5,
-    height: 200,
+    height: 180,
     width: undefined,
     flexDirection: 'row',
     backgroundColor:'white',
@@ -100,6 +160,38 @@ var styles = StyleSheet.create({
     fontSize: 16,
     paddingRight: 5,
     width: windowWidth-130,//TODO, how to let Text autofit the view width?
+  },
+
+  wiki: {
+    fontSize: 15,
+    marginBottom: 24,
+  },
+
+  body: {
+    marginBottom: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    height: undefined,
+    width: undefined,
+    flexDirection: 'column',
+    backgroundColor:'white',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 1,
+    elevation: 2,
+  },
+
+  bodyTitle: {
+    width: undefined,
+    height: undefined,
+    fontWeight:'bold',
+    fontSize: 16,
+  },
+
+  bodyItem: {
+    width: undefined,
+    height: undefined,
+    color: 'blue',
   }
 });
 

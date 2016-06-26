@@ -24,9 +24,22 @@ class MarvelAPI {
       }
   }
 
+  async getCharacterDetail(url: string) {
+    var generalParam = getMarvelRequestParam();
+    var request = `${url}?${generalParam}`;
+    global.LOG(request);
+    try {
+      let response = await fetch(request);
+      const result = await response.json();
+      global.LOG(result);
+    } catch(error) {
+      global.LOG(error);
+    }
+  }
+
   async getPopularCharacters(): Array<Character> {
     var result = new Array();
-    var populars = new Array('Spider-Man','3-D Man', 'Aaron Stack','Iron Man','Avengers');
+    var populars = new Array('Spider-Man','Hulk', 'Captain America','Iron Man','Avengers','X-Men', 'Deadpool', 'Guardians of the Galaxy');
     for(var index=0; index<populars.length; index++) {
       var data = await this.getCharacterByName(populars[index]);
       result.push(data);
@@ -40,6 +53,7 @@ class MarvelAPI {
     try {
       let response = await fetch(request);
       const result = await response.json();
+
       if(result.code === 200) {
         var results = result.data.results[0];
         var name = results.name;
@@ -68,7 +82,11 @@ class MarvelAPI {
 
         var urls = new Array();
         var urlsitems = results.urls;
+        var wiki;
         urlsitems.map((item, index) => {
+          if(item.type === 'detail') {
+            wiki = item.url;
+          }
           urls.push(item);
         });
 
@@ -82,6 +100,7 @@ class MarvelAPI {
           id: id,
           name: name,
           description: description,
+          wiki: wiki,
           thumbnail: thumbnail,
           portraitImg: portraitImg,
           comics: comics,

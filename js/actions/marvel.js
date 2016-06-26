@@ -24,6 +24,14 @@ async function getCharacterByName(name: string) {
   };
 }
 
+async function getCharacterDetail(url: string) {
+  const result = await marvel.getCharacterDetail(url);
+  return {
+    type: 'GET_CHARACTER_DETAIL',
+    data: result
+  };
+}
 
 
-module.exports = { getPopularCharacters, getCharacterByName };
+
+module.exports = { getPopularCharacters, getCharacterByName, getCharacterDetail };
