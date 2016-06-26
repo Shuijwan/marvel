@@ -87,7 +87,7 @@ class CharactersContentView extends React.Component {
   }
 
   handleSearchIconClicked() {
-
+    this.props.navigator.push({ search: "search hero" });
   }
 }
 

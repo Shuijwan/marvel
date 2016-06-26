@@ -12,6 +12,7 @@ var Navigator = require('Navigator');
 var { connect } = require('react-redux');
 var MarvelTabsView = require('MarvelTabsView');
 var CharacterDetailView = require('./tabs/characters/CharacterDetailView');
+var SearchView = require('./tabs/characters/SearchView');
 
 var MarvelNavigator = React.createClass({
   _backHandlers: ([]: Array<() => boolean>),
@@ -84,6 +85,13 @@ var MarvelNavigator = React.createClass({
         <CharacterDetailView navigator={navigator} character={route.character}/>
       );
     }
+
+    if(route.search) {
+      return (
+        <SearchView navigator={navigator}/>
+      );
+    }
+
     return (
       <MarvelTabsView navigator={navigator}/>
     );
