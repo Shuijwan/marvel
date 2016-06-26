@@ -18,7 +18,7 @@ var {windowWidth} = require('constant');
 
 import ActionButton from 'react-native-action-button';
 
-const batman = require('../img/batmancolor.png');
+var batman = require('../img/batman_color.png');
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class CharactersContentView extends React.Component {
@@ -40,8 +40,8 @@ class CharactersContentView extends React.Component {
         <ToolbarAndroid
           title='CHARACTERS'
           titleColor='white'
-          style={styles.toolbar}
           navIcon={batman}
+          style={styles.toolbar}
           onIconClicked= {this.handleIconClicked}/>
         <ListView
           style={{flex:1, width: undefined, height: undefined}}

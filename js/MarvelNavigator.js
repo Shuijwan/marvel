@@ -61,6 +61,9 @@ var MarvelNavigator = React.createClass({
         ref="navigator"
         style={styles.container}
         configureScene={(route) => {
+          if(route.character) {
+            return Navigator.SceneConfigs.PushFromRight;
+          }
           if (Platform.OS === 'android') {
             return Navigator.SceneConfigs.FloatFromBottomAndroid;
           }

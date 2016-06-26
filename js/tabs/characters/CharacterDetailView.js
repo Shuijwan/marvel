@@ -8,6 +8,9 @@ var React = require('react');
 var StyleSheet = require('StyleSheet');
 var View = require('View');
 var ToolbarAndroid = require('ToolbarAndroid');
+var Image = require('Image');
+var {windowWidth} = require('constant');
+var Text = require('Text');
 
 
 class CharacterDetailView extends React.Component {
@@ -28,6 +31,17 @@ class CharacterDetailView extends React.Component {
           onIconClicked= {this.handleIconClicked}
           style={styles.toolbar}
         />
+        <View style={styles.head}>
+          <Image style={styles.img} source={{uri: this.props.character.portraitImg}} />
+          <View style={{flexDirection: 'column'}} >
+            <Text style={styles.title}>
+              {this.props.character.name}
+            </Text>
+            <Text numberOfLines={3} style={styles.description}>
+              {this.props.character.description}
+            </Text>
+          </View>
+        </View>
       </View>
     );
   }
@@ -51,6 +65,42 @@ var styles = StyleSheet.create({
     marginRight: -1,
     borderRightColor: 'transparent',
   },
+
+  head: {
+    marginTop: 5,
+    marginBottom: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    height: 200,
+    width: undefined,
+    flexDirection: 'row',
+    backgroundColor:'white',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 1,
+    elevation: 2,
+  },
+
+  img: {
+    width: 120,
+    height: undefined,
+    alignItems: 'center',
+    resizeMode:Image.resizeMode.contain,
+    marginRight: 10,
+  },
+
+  title: {
+    marginTop: 15,
+    marginBottom: 10,
+    fontSize: 18,
+    fontWeight:'bold',
+  },
+
+  description: {
+    fontSize: 16,
+    paddingRight: 5,
+    width: windowWidth-130,//TODO, how to let Text autofit the view width?
+  }
 });
 
 module.exports = CharacterDetailView;

@@ -9,6 +9,7 @@ export type Character = {
   name: string;
   description: string;
   thumbnail: string;
+  portraitImg: string;
   comics: Array<Comic>;
   series: Array<Series>;
   stories: Array<Story>;

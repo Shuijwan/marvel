@@ -46,6 +46,7 @@ class MarvelAPI {
         var id = results.id;
         var description = results.description;
         var thumbnail = `${results.thumbnail.path}/standard_medium.${results.thumbnail.extension}`;
+        var portraitImg = `${results.thumbnail.path}/portrait_xlarge.${results.thumbnail.extension}`;
 
         var comics = new Array();
         var comicsitems = results.comics.items;
@@ -82,6 +83,7 @@ class MarvelAPI {
           name: name,
           description: description,
           thumbnail: thumbnail,
+          portraitImg: portraitImg,
           comics: comics,
           events: events,
           stories: stories,
