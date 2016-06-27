@@ -37,6 +37,81 @@ class MarvelAPI {
     }
   }
 
+  async searchCharacterByName(startWith: string): Array<Character> {
+    var generalParam = getMarvelRequestParam();
+    var request = `${serverUrl}characters?nameStartsWith=${startWith}&${generalParam}`;
+    try {
+      let response = await fetch(request);
+      const responseJson = await response.json();
+      var result = new Array();
+
+      if(responseJson.code === 200) {
+        var results = responseJson.data.results;
+
+        results.map((item, index) => {
+          var name = item.name;
+          var id = item.id;
+          var description = item.description;
+          var thumbnail = `${item.thumbnail.path}/standard_medium.${item.thumbnail.extension}`;
+          var portraitImg = `${item.thumbnail.path}/portrait_xlarge.${item.thumbnail.extension}`;
+
+          var comics = new Array();
+          var comicsitems = item.comics.items;
+          comicsitems.map((item, index) => {
+            comics.push(item);
+          });
+
+          var events = new Array();
+          var eventsitems = item.events.items;
+          eventsitems.map((item, index) => {
+            events.push(item);
+          });
+
+          var stories = new Array();
+          var storiesitems = item.stories.items;
+          storiesitems.map((item, index) => {
+            stories.push(item);
+          });
+
+          var urls = new Array();
+          var urlsitems = item.urls;
+          var wiki;
+          urlsitems.map((item, index) => {
+            if(item.type === 'detail') {
+              wiki = item.url;
+            }
+            urls.push(item);
+          });
+
+          var series = new Array();
+          var seriesitems = item.series.items;
+          seriesitems.map((item, index) => {
+            series.push(item);
+          });
+
+          result.push({
+            id: id,
+            name: name,
+            description: description,
+            wiki: wiki,
+            thumbnail: thumbnail,
+            portraitImg: portraitImg,
+            comics: comics,
+            events: events,
+            stories: stories,
+            series: series,
+            urls: urls,
+          });
+        });
+      }
+
+      global.LOG('result', result);
+      return result;
+    } catch(error) {
+      global.LOG(error);
+    }
+  }
+
   async getPopularCharacters(): Array<Character> {
     var result = new Array();
     var populars = new Array('Spider-Man','Hulk', 'Captain America','Iron Man','Avengers','X-Men', 'Deadpool', 'Guardians of the Galaxy');

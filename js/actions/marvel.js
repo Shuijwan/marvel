@@ -16,12 +16,19 @@ async function getPopularCharacters(): Action {
   };
 }
 
-async function getCharacterByName(name: string) {
-  const result = await marvel.getCharacterByName(name);
+async function searchCharacterByName(name: string) {
+  const result = await marvel.searchCharacterByName(name);
   return {
-    type: 'GET_CHARACTER_BY_NAME',
+    type: 'SEARCH_CHARACTER_BY_NAME',
     data: result
   };
+}
+
+async function clearSearchResult() {
+  return {
+    type: 'SEARCH_CHARACTER_BY_NAME',
+    data: null
+  }
 }
 
 async function getCharacterDetail(url: string) {
@@ -34,4 +41,4 @@ async function getCharacterDetail(url: string) {
 
 
 
-module.exports = { getPopularCharacters, getCharacterByName, getCharacterDetail };
+module.exports = { getPopularCharacters, searchCharacterByName, getCharacterDetail, clearSearchResult };

@@ -14,7 +14,7 @@ var StyleSheet = require('StyleSheet');
 var View = require('View');
 
 var {connect} = require('react-redux');
-var { getPopularCharacters, getCharacterByName } = require('./actions');
+var { getPopularCharacters } = require('./actions');
 
 var MarvelApp = React.createClass({
   componentDidMount: function() {

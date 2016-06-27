@@ -9,7 +9,7 @@ import type {Character} from '../marvelapi/model';
 
 export type State = {
   popularcharacters: Array<Character>;
-  character: Character;
+  searchResult: Array<Character>;
   characterDetail: string;
 };
 
@@ -19,8 +19,8 @@ function marvel(state: State = initialState, action: Action): State {
   if (action.type === 'GET_POPULAR_CHARACTERS') {
     return {...state, popularcharacters: action.data};
   }
-  if(action.type === 'GET_CHARACTER_BY_NAME') {
-    return {...state, character: action.data};
+  if(action.type === 'SEARCH_CHARACTER_BY_NAME') {
+    return {...state, searchResult: action.data};
   }
 
   if(action.type === 'GET_CHARACTER_DETAIL') {

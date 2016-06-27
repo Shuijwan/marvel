@@ -14,6 +14,7 @@
     "redux-logger": "~2.5.0",
     "redux-persist": "~1.5.0",
     "react-native-action-button":"~1.1.5",
-    "react-native-hyperlink":"~0.0.5"
+    "react-native-hyperlink":"~0.0.5",
+    "react-timer-mixin":"~0.13.3"
   }
 }
