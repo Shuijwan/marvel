@@ -49,63 +49,11 @@ class MarvelAPI {
         var results = responseJson.data.results;
 
         results.map((item, index) => {
-          var name = item.name;
-          var id = item.id;
-          var description = item.description;
-          var thumbnail = `${item.thumbnail.path}/standard_medium.${item.thumbnail.extension}`;
-          var portraitImg = `${item.thumbnail.path}/portrait_xlarge.${item.thumbnail.extension}`;
-
-          var comics = new Array();
-          var comicsitems = item.comics.items;
-          comicsitems.map((item, index) => {
-            comics.push(item);
-          });
-
-          var events = new Array();
-          var eventsitems = item.events.items;
-          eventsitems.map((item, index) => {
-            events.push(item);
-          });
-
-          var stories = new Array();
-          var storiesitems = item.stories.items;
-          storiesitems.map((item, index) => {
-            stories.push(item);
-          });
-
-          var urls = new Array();
-          var urlsitems = item.urls;
-          var wiki;
-          urlsitems.map((item, index) => {
-            if(item.type === 'detail') {
-              wiki = item.url;
-            }
-            urls.push(item);
-          });
-
-          var series = new Array();
-          var seriesitems = item.series.items;
-          seriesitems.map((item, index) => {
-            series.push(item);
-          });
-
-          result.push({
-            id: id,
-            name: name,
-            description: description,
-            wiki: wiki,
-            thumbnail: thumbnail,
-            portraitImg: portraitImg,
-            comics: comics,
-            events: events,
-            stories: stories,
-            series: series,
-            urls: urls,
-          });
+          var character = parseCharacter(item);
+          result.push(character);
         });
       }
-
-      global.LOG('result', result);
+      
       return result;
     } catch(error) {
       global.LOG(error);
@@ -131,59 +79,7 @@ class MarvelAPI {
 
       if(result.code === 200) {
         var results = result.data.results[0];
-        var name = results.name;
-        var id = results.id;
-        var description = results.description;
-        var thumbnail = `${results.thumbnail.path}/standard_medium.${results.thumbnail.extension}`;
-        var portraitImg = `${results.thumbnail.path}/portrait_xlarge.${results.thumbnail.extension}`;
-
-        var comics = new Array();
-        var comicsitems = results.comics.items;
-        comicsitems.map((item, index) => {
-          comics.push(item);
-        });
-
-        var events = new Array();
-        var eventsitems = results.events.items;
-        eventsitems.map((item, index) => {
-          events.push(item);
-        });
-
-        var stories = new Array();
-        var storiesitems = results.stories.items;
-        storiesitems.map((item, index) => {
-          stories.push(item);
-        });
-
-        var urls = new Array();
-        var urlsitems = results.urls;
-        var wiki;
-        urlsitems.map((item, index) => {
-          if(item.type === 'detail') {
-            wiki = item.url;
-          }
-          urls.push(item);
-        });
-
-        var series = new Array();
-        var seriesitems = results.series.items;
-        seriesitems.map((item, index) => {
-          series.push(item);
-        });
-
-        return {
-          id: id,
-          name: name,
-          description: description,
-          wiki: wiki,
-          thumbnail: thumbnail,
-          portraitImg: portraitImg,
-          comics: comics,
-          events: events,
-          stories: stories,
-          series: series,
-          urls: urls,
-        };
+        return parseCharacter(results);
       }
 
     } catch(error) {
@@ -191,6 +87,62 @@ class MarvelAPI {
     }
 
     return null;
+  }
+
+  function parseCharacter(data: string): Character {
+    var name = data.name;
+    var id = data.id;
+    var description = data.description;
+    var thumbnail = `${data.thumbnail.path}/standard_medium.${data.thumbnail.extension}`;
+    var portraitImg = `${data.thumbnail.path}/portrait_xlarge.${data.thumbnail.extension}`;
+
+    var comics = new Array();
+    var comicsitems = data.comics.items;
+    comicsitems.map((item, index) => {
+      comics.push(item);
+    });
+
+    var events = new Array();
+    var eventsitems = data.events.items;
+    eventsitems.map((item, index) => {
+      events.push(item);
+    });
+
+    var stories = new Array();
+    var storiesitems = data.stories.items;
+    storiesitems.map((item, index) => {
+      stories.push(item);
+    });
+
+    var urls = new Array();
+    var urlsitems = data.urls;
+    var wiki;
+    urlsitems.map((item, index) => {
+      if(item.type === 'detail') {
+        wiki = item.url;
+      }
+      urls.push(item);
+    });
+
+    var series = new Array();
+    var seriesitems = data.series.items;
+    seriesitems.map((item, index) => {
+      series.push(item);
+    });
+
+    return {
+      id: id,
+      name: name,
+      description: description,
+      wiki: wiki,
+      thumbnail: thumbnail,
+      portraitImg: portraitImg,
+      comics: comics,
+      events: events,
+      stories: stories,
+      series: series,
+      urls: urls,
+    };
   }
 }
 
