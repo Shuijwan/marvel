@@ -15,6 +15,7 @@ var {connect} = require('react-redux');
 var ListView = require('ListView');
 var RecyclerViewBackedScrollView = require('RecyclerViewBackedScrollView');
 var {windowWidth} = require('constant');
+var ProgressBar = require('ActivityIndicator');
 
 var {searchCharacterByName, clearSearchResult} = require('../../actions');
 
@@ -30,10 +31,19 @@ class SearchView extends React.Component {
     this.handleBackPressed = this.handleBackPressed.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
     this.renderRow = this.renderRow.bind(this);
+    this.state = {
+      isSearching: false,
+    }
   }
 
   componentDidMount() {
     this.props.dispatch(clearSearchResult());
+  }
+
+  componentWillReceiveProps() {
+    this.setState({
+      isSearching: false
+    });
   }
 
   render() {
@@ -41,6 +51,20 @@ class SearchView extends React.Component {
       ds = ds.cloneWithRows(this.props.result);
     } else {
       ds = ds.cloneWithRows([]);
+    }
+
+    var progress;
+    var list;
+    if(this.state.isSearching) {
+      progress = <ProgressBar style={{marginTop: 20}} color={'rgb(18, 134, 117)'} size="large"/>;
+    } else {
+      list = <ListView
+        style={{flex:1, width: undefined, height: undefined}}
+        dataSource={ds}
+        renderRow={this.renderRow}
+        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+        enableEmptySections
+      />
     }
 
     return (
@@ -57,13 +81,8 @@ class SearchView extends React.Component {
             onChangeText={this.onChangeText}
             />
         </View>
-        <ListView
-          style={{flex:1, width: undefined, height: undefined}}
-          dataSource={ds}
-          renderRow={this.renderRow}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          enableEmptySections
-        />
+        {progress}
+        {list}
       </View>
     );
   }
@@ -100,14 +119,20 @@ class SearchView extends React.Component {
   onChangeText(text: string) {
       TimerMixin.clearTimeout(timerId);
       timerId = TimerMixin.setTimeout(() => {this.searchCharacter(text)}, 1000);
+
   }
 
   searchCharacter(name: string) {
-    global.LOG('search', name);
     if(name.length > 0) {
       this.props.dispatch(searchCharacterByName(name));
+      this.setState({
+        isSearching: true
+      });
     } else {
       this.props.dispatch(clearSearchResult());
+      this.setState({
+        isSearching: false
+      });
     }
   }
 }
