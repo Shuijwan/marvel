@@ -16,6 +16,7 @@ var ListView = require('ListView');
 var RecyclerViewBackedScrollView = require('RecyclerViewBackedScrollView');
 var {windowWidth} = require('constant');
 var ProgressBar = require('ActivityIndicator');
+var ToastAndroid = require('ToastAndroid');
 
 var {searchCharacterByName, clearSearchResult} = require('../../actions');
 
@@ -40,13 +41,18 @@ class SearchView extends React.Component {
     this.props.dispatch(clearSearchResult());
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
     this.setState({
       isSearching: false
     });
+
+    if(!nextProps.result || nextProps.result.length == 0) {
+      ToastAndroid.show('Not Found', ToastAndroid.SHORT);
+    }
   }
 
   render() {
+
     if(this.props.result && this.props.result.length > 0) {
       ds = ds.cloneWithRows(this.props.result);
     } else {
