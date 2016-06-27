@@ -14,11 +14,13 @@ var {connect} = require('react-redux');
 var ListView = require('ListView');
 var TouchableHighlight = require('TouchableHighlight');
 var RecyclerViewBackedScrollView = require('RecyclerViewBackedScrollView');
+var MarvelHeader = require('MarvelHeader');
 var {windowWidth} = require('constant');
+var Platform = require('Platform');
 
 import ActionButton from 'react-native-action-button';
 
-var batman = require('../img/batmancolor.png');
+var batman = require('../img/shieldcolor.png');
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class CharactersContentView extends React.Component {
@@ -33,26 +35,41 @@ class CharactersContentView extends React.Component {
     if(this.props.characters && this.props.characters.length > 0) {
       ds = ds.cloneWithRows(this.props.characters);
     }
+
+    var actionButton;
+    var head;
+    if(Platform.OS === 'Android') {
+      head =
+        <View style={{flexDirection: 'column'}}>
+          <View style={{backgroundColor:'rgb(18, 134, 117)', height: 25}}/>
+          <ToolbarAndroid
+            title='CHARACTERS'
+            titleColor='white'
+            navIcon={batman}
+            style={styles.toolbar}
+            onIconClicked= {this.handleIconClicked}/>
+        </View>
+
+      actionButton = <ActionButton
+        buttonColor="rgb(18, 134, 117)"
+        onPress={() => { this.handleSearchIconClicked()}}
+      />;
+    } else {
+      head = <MarvelHeader title={'CHARACTERS'}/>
+    }
+
+
+
     return (
       <View style={styles.container}>
-        <View style={{backgroundColor:'rgb(18, 134, 117)', height: 25}}
-        />
-        <ToolbarAndroid
-          title='CHARACTERS'
-          titleColor='white'
-          navIcon={batman}
-          style={styles.toolbar}
-          onIconClicked= {this.handleIconClicked}/>
+        {head}
         <ListView
           style={{flex:1, width: undefined, height: undefined}}
           dataSource={ds}
           renderRow={this.renderRow}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         />
-        <ActionButton
-          buttonColor="rgb(18, 134, 117)"
-          onPress={() => { this.handleSearchIconClicked()}}
-        />
+        {actionButton}
       </View>
     );
   }

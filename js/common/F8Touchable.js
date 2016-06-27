@@ -25,11 +25,14 @@
 
 'use strict';
 
-import React, {
+import {
   TouchableHighlight,
   TouchableNativeFeedback,
   Platform,
 } from 'react-native';
+
+import React from 'react';
+
 
 function F8TouchableIOS(props: Object): ReactElement {
   return (

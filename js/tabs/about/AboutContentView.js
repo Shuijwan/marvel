@@ -13,6 +13,8 @@ var ToolbarAndroid = require('ToolbarAndroid');
 var Image = require('Image');
 var {windowWidth} = require('constant');
 var Linking = require('Linking');
+var MarvelHeader = require('MarvelHeader');
+var Platform = require('Platform');
 
 import Hyperlink from 'react-native-hyperlink';
 
@@ -31,8 +33,10 @@ class AboutContentView extends React.Component {
   }
 
   render() {
-    return (
-      <View style={{flex:1, flexDirection:'column',}}>
+    var head;
+    if(Platform.OS === 'Android') {
+      head =
+      <View style={{flexDirection:'column'}}>
         <View style={{backgroundColor:'rgb(168, 31, 26)', height: 25}}
         />
         <ToolbarAndroid
@@ -42,6 +46,14 @@ class AboutContentView extends React.Component {
           onIconClicked= {this.handleIconClicked}
           style={styles.toolbar}
         />
+      </View>
+    } else {
+      head = <MarvelHeader title={'About'} />;
+    }
+
+    return (
+      <View style={{flex:1, flexDirection:'column',}}>
+        {head}
         <Image
           source={require('../img/about_marvel_logo.png')}
           style={{width:windowWidth, height:200}}

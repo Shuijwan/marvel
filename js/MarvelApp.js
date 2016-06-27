@@ -6,7 +6,7 @@
 'use strict';
 
 var React = require('react');
-var AppState = require('AppState');
+// var AppState = require('AppState');
 var SplashScreen = require('./splash/SplashScreen');
 var MarvelNavigator = require('./MarvelNavigator');
 var StatusBar = require('StatusBar');
@@ -18,12 +18,12 @@ var { getPopularCharacters } = require('./actions');
 
 var MarvelApp = React.createClass({
   componentDidMount: function() {
-    AppState.addEventListener('change', this.handleAppStateChange);
+    // AppState.addEventListener('change', this.handleAppStateChange);
     this.props.dispatch(getPopularCharacters());
   },
 
   componentWillUnmount: function() {
-    AppState.removeEventListener('change', this.handleAppStateChange);
+    // AppState.removeEventListener('change', this.handleAppStateChange);
   },
 
   handleAppStateChange: function(appState) {

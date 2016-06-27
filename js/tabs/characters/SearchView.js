@@ -17,6 +17,7 @@ var RecyclerViewBackedScrollView = require('RecyclerViewBackedScrollView');
 var {windowWidth} = require('constant');
 var ProgressBar = require('ActivityIndicator');
 var ToastAndroid = require('ToastAndroid');
+var Platform = require('Platform');
 
 var {searchCharacterByName, clearSearchResult} = require('../../actions');
 
@@ -46,8 +47,10 @@ class SearchView extends React.Component {
       isSearching: false
     });
 
-    if(!nextProps.result || nextProps.result.length == 0) {
-      ToastAndroid.show('Not Found', ToastAndroid.SHORT);
+    if(Platform.OS === 'Android') {
+      if(!nextProps.result || nextProps.result.length == 0) {
+        ToastAndroid.show('Not Found', ToastAndroid.SHORT);
+      }
     }
   }
 
@@ -61,6 +64,13 @@ class SearchView extends React.Component {
 
     var progress;
     var list;
+    var back;
+    if(Platform.OS === 'Android') {
+      back =   <TouchableHighlight underlayColor='transparent' onPress={this.handleBackPressed}>
+          <Image style={styles.back} source={require('../img/back.png')} />
+        </TouchableHighlight>
+    }
+
     if(this.state.isSearching) {
       progress = <ProgressBar style={{marginTop: 20}} color={'rgb(18, 134, 117)'} size="large"/>;
     } else {
@@ -78,9 +88,7 @@ class SearchView extends React.Component {
         <View style={{backgroundColor:'rgb(18, 134, 117)', height: 25}}
         />
         <View style={styles.toolbar}>
-          <TouchableHighlight underlayColor='transparent' onPress={this.handleBackPressed}>
-            <Image style={styles.back} source={require('../img/back.png')} />
-          </TouchableHighlight>
+          {back}
           <TextInput
             placeholder="Search the hero"
             style={styles.search}

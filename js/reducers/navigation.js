@@ -6,7 +6,7 @@
 
 import type {Action} from '../actions/types';
 
-export type Tab =  'characters' | 'about';
+export type Tab =  'characters' | 'search' | 'about';
 
 type State = {
   tab: Tab;

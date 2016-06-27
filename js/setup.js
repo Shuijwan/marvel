@@ -32,9 +32,9 @@ function setup() : React.Component {
 }
 
 global.LOG = (...args) => {
-  console.log('/---------------------\\');
-  console.log(...args);
-  console.log('\\---------------------/');
+  console.warn('/---------------------\\');
+  console.warn(...args);
+  console.warn('\\---------------------/');
 
   return args[args.length-1];
 };

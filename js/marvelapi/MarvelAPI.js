@@ -10,6 +10,8 @@
 var {serverUrl} = require('../env');
 var {getMarvelRequestParam} = require('./Util');
 var {writeToRealm, getCharacterFromRealm} = require('./realmModel');
+var Platform = require('Platform');
+
 import type {Character} from './model';
 
 class MarvelAPI {
@@ -57,7 +59,7 @@ class MarvelAPI {
 
       return result;
     } catch(error) {
-      global.LOG(error);
+      global.LOG(error, request);
     }
   }
 
@@ -83,14 +85,13 @@ class MarvelAPI {
     try {
       let response = await fetch(request);
       const result = await response.json();
-
       if(result.code === 200) {
         var results = result.data.results[0];
         return this.parseCharacter(results);
       }
 
     } catch(error) {
-      global.LOG(error);
+      global.LOG(error, request);
     }
 
     return null;
@@ -100,8 +101,13 @@ class MarvelAPI {
     var name = data.name;
     var id = data.id;
     var description = data.description;
-    var thumbnail = `${data.thumbnail.path}/standard_medium.${data.thumbnail.extension}`;
-    var portraitImg = `${data.thumbnail.path}/portrait_xlarge.${data.thumbnail.extension}`;
+    var serverPath = data.thumbnail.path;
+    if(Platform.OS === 'ios') {
+      serverPath = serverPath.substring(4, serverPath.length);
+      serverPath = `https${serverPath}`;
+    }
+    var thumbnail = `${serverPath}/standard_medium.${data.thumbnail.extension}`;
+    var portraitImg = `${serverPath}/portrait_xlarge.${data.thumbnail.extension}`;
 
     var comics = new Array();
     var comicsitems = data.comics.items;

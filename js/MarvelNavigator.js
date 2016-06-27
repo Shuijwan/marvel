@@ -13,16 +13,21 @@ var { connect } = require('react-redux');
 var MarvelTabsView = require('MarvelTabsView');
 var CharacterDetailView = require('./tabs/characters/CharacterDetailView');
 var SearchView = require('./tabs/characters/SearchView');
+var Platform = require('Platform');
 
 var MarvelNavigator = React.createClass({
   _backHandlers: ([]: Array<() => boolean>),
 
   componentDidMount: function() {
-    BackAndroid.addEventListener('hardwareBackPress', this.handleBackPressed);
+    if(Platform.OS === 'Android') {
+      BackAndroid.addEventListener('hardwareBackPress', this.handleBackPressed);
+    }
   },
 
   componentWillUnmount: function() {
-    BackAndroid.removeEventListener('hardwareBackPress', this.handleBackPressed);
+    if(Platform.OS === 'Android') {
+      BackAndroid.removeEventListener('hardwareBackPress', this.handleBackPressed);
+    }
   },
 
   getChildContext() {

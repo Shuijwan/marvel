@@ -14,6 +14,8 @@ var Text = require('Text');
 var Linking = require('Linking');
 var ScrollView = require('ScrollView');
 var {getMarvelRequestParam} = require('../../marvelapi/Util');
+var Platform = require('Platform');
+var MarvelHeader = require('MarvelHeader');
 
 import Hyperlink from 'react-native-hyperlink';
 
@@ -25,8 +27,10 @@ class CharacterDetailView extends React.Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
+    var head;
+    if(Platform.OS === 'Android') {
+      head =
+      <View style={{flexDirection:'column'}}>
         <View style={{backgroundColor:'rgb(18, 134, 117)', height: 25}}
         />
         <ToolbarAndroid
@@ -36,6 +40,14 @@ class CharacterDetailView extends React.Component {
           onIconClicked= {this.handleIconClicked}
           style={styles.toolbar}
         />
+      </View>
+    } else {
+      head = <MarvelHeader title={this.props.character.name} />
+    }
+
+    return (
+      <View style={styles.container}>
+        {head}
         <View style={styles.head}>
           <Image style={styles.img} source={{uri: this.props.character.portraitImg}} />
           <View style={{flexDirection: 'column'}} >
