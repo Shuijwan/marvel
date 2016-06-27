@@ -9,6 +9,9 @@
 ![alt tag](./screenshot/3.png)
 ![alt tag](./screenshot/4.png)
 
+# Download
+[APK](./apk/app-release.apk)
+
 # Features
   - 显示流行的漫威角色
   - 搜索漫威character, event, story, series
