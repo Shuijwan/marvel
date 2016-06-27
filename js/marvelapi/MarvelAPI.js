@@ -9,6 +9,7 @@
 // (the hash value is the md5 digest of 1abcd1234)
 var {serverUrl} = require('../env');
 var {getMarvelRequestParam} = require('./Util');
+var {writeToRealm, getCharacterFromRealm} = require('./realmModel');
 import type {Character} from './model';
 
 class MarvelAPI {
@@ -49,11 +50,11 @@ class MarvelAPI {
         var results = responseJson.data.results;
 
         results.map((item, index) => {
-          var character = parseCharacter(item);
+          var character = this.parseCharacter(item);
           result.push(character);
         });
       }
-      
+
       return result;
     } catch(error) {
       global.LOG(error);
@@ -64,8 +65,14 @@ class MarvelAPI {
     var result = new Array();
     var populars = new Array('Spider-Man','Hulk', 'Captain America','Iron Man','Avengers','X-Men', 'Deadpool', 'Guardians of the Galaxy');
     for(var index=0; index<populars.length; index++) {
-      var data = await this.getCharacterByName(populars[index]);
-      result.push(data);
+      var realmCharacter = await getCharacterFromRealm(populars[index]);
+      if(realmCharacter) {
+        result.push(realmCharacter);
+      } else {
+        var data = await this.getCharacterByName(populars[index]);
+        result.push(data);
+        writeToRealm(data);
+      }
     }
     return result;
   }
@@ -79,7 +86,7 @@ class MarvelAPI {
 
       if(result.code === 200) {
         var results = result.data.results[0];
-        return parseCharacter(results);
+        return this.parseCharacter(results);
       }
 
     } catch(error) {
@@ -89,7 +96,7 @@ class MarvelAPI {
     return null;
   }
 
-  function parseCharacter(data: string): Character {
+  parseCharacter(data: string): Character {
     var name = data.name;
     var id = data.id;
     var description = data.description;
