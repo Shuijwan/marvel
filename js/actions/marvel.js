@@ -24,7 +24,7 @@ async function searchCharacterByName(name: string) {
   };
 }
 
-async function clearSearchResult() {
+function clearSearchResult() {
   return {
     type: 'SEARCH_CHARACTER_BY_NAME',
     data: null
