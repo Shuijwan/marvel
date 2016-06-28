@@ -40,8 +40,8 @@ class MarvelTabsView extends React.Component {
       <TabBarIOS tintColor={F8Colors.darkText}>
         <TabBarIOS.Item
           title="POPULAR"
-          selected={this.props.tab === 'character'}
-          onPress={this.onTabSelected.bind(this, 'character')}
+          selected={this.props.tab === 'characters'}
+          onPress={this.onTabSelected.bind(this, 'characters')}
           icon={require('./img/batman.png')}
           renderAsOriginal= {true}
           selectedIcon={require('./img/batmancolor.png')}>

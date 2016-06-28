@@ -59,7 +59,7 @@ class AboutContentView extends React.Component {
           style={{width:windowWidth, height:200}}
         />
         <Text style={styles.description}>
-          This is a React Native App based on coolest Marvel API. You can search the Marvel Heros here.
+          This is a React Native App based on the coolest Marvel API. You can search the Marvel Heros here.
         </Text>
         <F8Touchable style={styles.item}>
           <View style={{flexDirection:'row'}}>
@@ -94,7 +94,7 @@ openDrawer: React.PropTypes.func,
 var styles = StyleSheet.create({
 
   item: {
-    height: 80,
+    height: 60,
     width: undefined,
   },
 
