@@ -65,7 +65,7 @@ const CharacterSchema = {
 
 let realm = new Realm({schema:[ComicSchema, SeriesSchema, StorySchema, EventSchema, UrlSchema, CharacterSchema]});
 
-function writeToRealm(character: Character) {
+function writeCharacterToRealm(character: Character) {
   realm.write(() => {
     let realmobject = realm.create('Character', {
       id: character.id,
@@ -145,4 +145,4 @@ function getCharacterFromRealm(name: string): Character {
   return null;
 }
 
-module.exports = {writeToRealm, getCharacterFromRealm};
+module.exports = {writeCharacterToRealm, getCharacterFromRealm};

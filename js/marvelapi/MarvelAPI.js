@@ -9,7 +9,7 @@
 // (the hash value is the md5 digest of 1abcd1234)
 var {serverUrl} = require('../env');
 var {getMarvelRequestParam} = require('./Util');
-var {writeToRealm, getCharacterFromRealm} = require('./realmModel');
+var {writeCharacterToRealm, getCharacterFromRealm} = require('./realmModel');
 var Platform = require('Platform');
 
 import type {Character} from './model';
@@ -75,7 +75,7 @@ class MarvelAPI {
       } else {
         var data = await this.getCharacterByName(populars[index]);
         result.push(data);
-        writeToRealm(data);
+        writeCharacterToRealm(data);
       }
     }
     return result;
