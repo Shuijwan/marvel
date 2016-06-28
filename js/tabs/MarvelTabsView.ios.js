@@ -11,7 +11,7 @@ var CharactersContentView = require('./characters/CharactersContentView');
 var SearchView = require('./characters/SearchView');
 var AboutView = require('./about/AboutContentView');
 var TabBarIOS = require('TabBarIOS');
-var TabBarItemIOS = require('TabBarItemIOS');
+
 var {connect} = require('react-redux');
 var F8Colors = require('F8Colors');
 var {switchTab} = require('../actions');
@@ -38,34 +38,37 @@ class MarvelTabsView extends React.Component {
   render() {
     return (
       <TabBarIOS tintColor={F8Colors.darkText}>
-        <TabBarItemIOS
-          title="CHARACTER"
+        <TabBarIOS.Item
+          title="POPULAR"
           selected={this.props.tab === 'character'}
           onPress={this.onTabSelected.bind(this, 'character')}
           icon={require('./img/batman.png')}
-          selectedIcon={require('./img/shieldcolor.png')}>
+          renderAsOriginal= {true}
+          selectedIcon={require('./img/batmancolor.png')}>
           <CharactersContentView
             navigator={this.props.navigator}
           />
-        </TabBarItemIOS>
-        <TabBarItemIOS
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
           title="SEARCH"
           selected={this.props.tab === 'search'}
           onPress={this.onTabSelected.bind(this, 'search')}
-          icon={require('./img/batman.png')}
-          selectedIcon={require('./img/shieldcolor.png')}>
+          renderAsOriginal= {true}
+          icon={require('./img/wolve.png')}
+          selectedIcon={require('./img/wolvecolor.png')}>
           <SearchView
             navigator={this.props.navigator}
           />
-        </TabBarItemIOS>
-        <TabBarItemIOS
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
           title="ABOUT"
           selected={this.props.tab === 'about'}
           onPress={this.onTabSelected.bind(this, 'about')}
+          renderAsOriginal= {true}
           icon={require('./img/shield.png')}
           selectedIcon={require('./img/shieldcolor.png')}>
           <AboutView navigator={this.props.navigator}/>
-        </TabBarItemIOS>
+        </TabBarIOS.Item>
       </TabBarIOS>
     );
   }

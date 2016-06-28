@@ -42,7 +42,7 @@ class CharacterDetailView extends React.Component {
         />
       </View>
     } else {
-      head = <MarvelHeader title={this.props.character.name} />
+      head = <MarvelHeader title={this.props.character.name} foreground='dark' style={{backgroundColor: 'rgb(18, 134, 117)'}}/>
     }
 
     return (

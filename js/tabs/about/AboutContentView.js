@@ -48,7 +48,7 @@ class AboutContentView extends React.Component {
         />
       </View>
     } else {
-      head = <MarvelHeader title={'About'} />;
+      head = <MarvelHeader title={'ABOUT'} foreground='dark' style= {{backgroundColor: 'rgb(168, 31, 26)'}}/>;
     }
 
     return (

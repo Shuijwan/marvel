@@ -55,7 +55,7 @@ class CharactersContentView extends React.Component {
         onPress={() => { this.handleSearchIconClicked()}}
       />;
     } else {
-      head = <MarvelHeader title={'CHARACTERS'}/>
+      head = <MarvelHeader title={'POPULAR HEROS'} foreground='dark' style={{backgroundColor: 'rgb(18, 134, 117)'}}/>
     }
 
 

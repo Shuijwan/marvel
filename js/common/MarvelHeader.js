@@ -130,7 +130,7 @@ class F8HeaderIOS extends React.Component {
     const itemsColor = foreground === 'dark' ? F8Colors.lightText : 'white';
 
     const content = React.Children.count(this.props.children) === 0
-      ? <Text style={[styles.titleText, {color: titleColor}]}>
+      ? <Text numberOfLines={1} style={[styles.titleText, {color: titleColor}]}>
           {title}
         </Text>
       : this.props.children;
@@ -172,7 +172,7 @@ class ItemWrapperIOS extends React.Component {
 
     if (layout !== 'icon' && title) {
       content = (
-        <Text style={[styles.itemText, {color}]}>
+        <Text numberOfLines={1} style={[styles.itemText, {color}]}>
           {title.toUpperCase()}
         </Text>
       );

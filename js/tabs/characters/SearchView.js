@@ -26,6 +26,8 @@ import TimerMixin from 'react-timer-mixin';
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 var timerId = 0;
 
+var titleBarBackgroundColor = Platform.OS === 'Android' ? 'rgb(18, 134, 117)' : 'rgb(23, 96, 157)';
+
 class SearchView extends React.Component {
 
   constructor(props) {
@@ -72,7 +74,7 @@ class SearchView extends React.Component {
     }
 
     if(this.state.isSearching) {
-      progress = <ProgressBar style={{marginTop: 20}} color={'rgb(18, 134, 117)'} size="large"/>;
+      progress = <ProgressBar style={{marginTop: 20}} color={titleBarBackgroundColor} size="large"/>;
     } else {
       list = <ListView
         style={{flex:1, width: undefined, height: undefined}}
@@ -85,7 +87,7 @@ class SearchView extends React.Component {
 
     return (
       <View style={{flex:1, flexDirection:'column',}}>
-        <View style={{backgroundColor:'rgb(18, 134, 117)', height: 25}}
+        <View style={{backgroundColor: titleBarBackgroundColor, height: 25}}
         />
         <View style={styles.toolbar}>
           {back}
@@ -154,7 +156,7 @@ class SearchView extends React.Component {
 var styles = StyleSheet.create({
   toolbar: {
     height: 56,
-    backgroundColor: 'rgb(18, 134, 117)',//red
+    backgroundColor: titleBarBackgroundColor,
     elevation: 2,
     borderRightWidth: 1,
     marginRight: -1,
