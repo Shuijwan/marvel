@@ -20,7 +20,7 @@ var Platform = require('Platform');
 
 import ActionButton from 'react-native-action-button';
 
-var batman = require('../img/shieldcolor.png');
+var batman = require('../img/batmancolor.png');
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class CharactersContentView extends React.Component {
@@ -38,7 +38,8 @@ class CharactersContentView extends React.Component {
 
     var actionButton;
     var head;
-    if(Platform.OS === 'Android') {
+
+    if(Platform.OS === 'android') {
       head =
         <View style={{flexDirection: 'column'}}>
           <View style={{backgroundColor:'rgb(18, 134, 117)', height: 25}}/>
@@ -57,8 +58,6 @@ class CharactersContentView extends React.Component {
     } else {
       head = <MarvelHeader title={'POPULAR HEROS'} foreground='dark' style={{backgroundColor: 'rgb(18, 134, 117)'}}/>
     }
-
-
 
     return (
       <View style={styles.container}>

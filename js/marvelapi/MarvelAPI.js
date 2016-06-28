@@ -43,10 +43,10 @@ class MarvelAPI {
   async searchCharacterByName(startWith: string): Array<Character> {
     var generalParam = getMarvelRequestParam();
     var request = `${serverUrl}characters?nameStartsWith=${startWith}&${generalParam}`;
+    var result = new Array();
     try {
       let response = await fetch(request);
       const responseJson = await response.json();
-      var result = new Array();
 
       if(responseJson.code === 200) {
         var results = responseJson.data.results;
@@ -55,12 +55,14 @@ class MarvelAPI {
           var character = this.parseCharacter(item);
           result.push(character);
         });
-      }
 
-      return result;
+        return result;
+      }
     } catch(error) {
       global.LOG(error, request);
     }
+
+    return result;
   }
 
   async getPopularCharacters(): Array<Character> {

@@ -26,7 +26,7 @@ import TimerMixin from 'react-timer-mixin';
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 var timerId = 0;
 
-var titleBarBackgroundColor = Platform.OS === 'Android' ? 'rgb(18, 134, 117)' : 'rgb(23, 96, 157)';
+var titleBarBackgroundColor = Platform.OS === 'android' ? 'rgb(18, 134, 117)' : 'rgb(23, 96, 157)';
 
 class SearchView extends React.Component {
 
@@ -49,8 +49,8 @@ class SearchView extends React.Component {
       isSearching: false
     });
 
-    if(Platform.OS === 'Android') {
-      if(!nextProps.result || nextProps.result.length == 0) {
+    if(Platform.OS === 'android') {
+      if(nextProps.result !== null && nextProps.result.length == 0) {
         ToastAndroid.show('Not Found', ToastAndroid.SHORT);
       }
     }
@@ -58,7 +58,8 @@ class SearchView extends React.Component {
 
   render() {
 
-    if(this.props.result && this.props.result.length > 0) {
+    global.LOG('result', this.props.result);
+    if(this.props.result !== null && this.props.result.length > 0) {
       ds = ds.cloneWithRows(this.props.result);
     } else {
       ds = ds.cloneWithRows([]);
@@ -67,7 +68,7 @@ class SearchView extends React.Component {
     var progress;
     var list;
     var back;
-    if(Platform.OS === 'Android') {
+    if(Platform.OS === 'android') {
       back =   <TouchableHighlight underlayColor='transparent' onPress={this.handleBackPressed}>
           <Image style={styles.back} source={require('../img/back.png')} />
         </TouchableHighlight>

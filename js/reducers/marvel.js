@@ -13,7 +13,7 @@ export type State = {
   characterDetail: string;
 };
 
-const initialState: State = {result: null};
+const initialState: State = {popularcharacters: null, searchResult: null};
 
 function marvel(state: State = initialState, action: Action): State {
   if (action.type === 'GET_POPULAR_CHARACTERS') {

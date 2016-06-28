@@ -28,7 +28,7 @@ class CharacterDetailView extends React.Component {
 
   render() {
     var head;
-    if(Platform.OS === 'Android') {
+    if(Platform.OS === 'android') {
       head =
       <View style={{flexDirection:'column'}}>
         <View style={{backgroundColor:'rgb(18, 134, 117)', height: 25}}

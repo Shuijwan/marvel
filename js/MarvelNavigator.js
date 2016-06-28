@@ -19,13 +19,13 @@ var MarvelNavigator = React.createClass({
   _backHandlers: ([]: Array<() => boolean>),
 
   componentDidMount: function() {
-    if(Platform.OS === 'Android') {
+    if(Platform.OS === 'android') {
       BackAndroid.addEventListener('hardwareBackPress', this.handleBackPressed);
     }
   },
 
   componentWillUnmount: function() {
-    if(Platform.OS === 'Android') {
+    if(Platform.OS === 'android') {
       BackAndroid.removeEventListener('hardwareBackPress', this.handleBackPressed);
     }
   },

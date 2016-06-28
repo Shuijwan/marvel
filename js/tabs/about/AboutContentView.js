@@ -34,7 +34,7 @@ class AboutContentView extends React.Component {
 
   render() {
     var head;
-    if(Platform.OS === 'Android') {
+    if(Platform.OS === 'android') {
       head =
       <View style={{flexDirection:'column'}}>
         <View style={{backgroundColor:'rgb(168, 31, 26)', height: 25}}
