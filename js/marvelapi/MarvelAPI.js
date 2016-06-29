@@ -9,7 +9,7 @@
 // (the hash value is the md5 digest of 1abcd1234)
 var {serverUrl} = require('../env');
 var {getMarvelRequestParam} = require('./Util');
-var {writeCharacterToRealm, getCharacterFromRealm, isRealmEmpty} = require('./realmModel');
+var {writeCharacterToRealm, getCharacterFromRealm, getPopularCharactersInRealm} = require('./realmModel');
 var Platform = require('Platform');
 
 import type {Character} from './model';
@@ -68,12 +68,15 @@ class MarvelAPI {
   async getPopularCharacters(): Array<Character> {
     var result = new Array();
     var populars = new Array('Spider-Man','Hulk', 'Captain America','Iron Man','Avengers','X-Men', 'Deadpool', 'Guardians of the Galaxy');
-    var realmIsEmpty = isRealmEmpty();
+    var charactersInRealm = getPopularCharactersInRealm();
+    if(charactersInRealm && charactersInRealm.length > 0) {
+      return charactersInRealm;
+    }
     for(var index=0; index<populars.length; index++) {
       var realmCharacter = await getCharacterFromRealm(populars[index]);
       if(realmCharacter) {
         result.push(realmCharacter);
-      } else if(realmIsEmpty) {
+      } else {
         var data = await this.getCharacterByName(populars[index]);
         result.push(data);
         writeCharacterToRealm(data);

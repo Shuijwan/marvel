@@ -102,47 +102,50 @@ function getCharacterFromRealm(name: string): Character {
   var query = `name = "${name}"`;
   let character = realm.objects('Character').filtered(query);
   if(character && character.length > 0) {
-
-    var comics = [];
-    for(var index=0; index < character[0].comics.length; index++) {
-      comics.push(character[0].comics[index]);
-    }
-
-    var series = [];
-    for(var index=0; index < character[0].series.length; index++) {
-      series.push(character[0].series[index]);
-    }
-
-    var stories = [];
-    for(var index=0; index < character[0].stories.length; index++) {
-      stories.push(character[0].stories[index]);
-    }
-
-    var events = [];
-    for(var index=0; index < character[0].events.length; index++) {
-      events.push(character[0].events[index]);
-    }
-
-    var urls = [];
-    for(var index=0; index < character[0].urls.length; index++) {
-      urls.push(character[0].urls[index]);
-    }
-    return {
-      id: character[0].id,
-      name: character[0].name,
-      description: character[0].description,
-      wiki: character[0].wiki,
-      thumbnail: character[0].thumbnail,
-      portraitImg: character[0].portraitImg,
-      comics: comics,
-      series: series,
-      stories: stories,
-      events: events,
-      urls: urls,
-    };
+      return parseRealmObject(character[0]);
   }
 
   return null;
+}
+
+function parseRealmObject(character: any): Character {
+  var comics = [];
+  for(var index=0; index < character.comics.length; index++) {
+    comics.push(character.comics[index]);
+  }
+
+  var series = [];
+  for(var index=0; index < character.series.length; index++) {
+    series.push(character.series[index]);
+  }
+
+  var stories = [];
+  for(var index=0; index < character.stories.length; index++) {
+    stories.push(character.stories[index]);
+  }
+
+  var events = [];
+  for(var index=0; index < character.events.length; index++) {
+    events.push(character.events[index]);
+  }
+
+  var urls = [];
+  for(var index=0; index < character.urls.length; index++) {
+    urls.push(character.urls[index]);
+  }
+  return {
+    id: character.id,
+    name: character.name,
+    description: character.description,
+    wiki: character.wiki,
+    thumbnail: character.thumbnail,
+    portraitImg: character.portraitImg,
+    comics: comics,
+    series: series,
+    stories: stories,
+    events: events,
+    urls: urls,
+  };
 }
 
 function isPopularCharacter(char: Character) {
@@ -152,7 +155,6 @@ function isPopularCharacter(char: Character) {
 }
 
 function removePopularCharacter(char: Character) {
-  global.LOG('remove', char.name);
   realm.write(() => {
     var query = `id = "${char.id}"`;
     let character = realm.objects('Character').filtered(query);
@@ -160,10 +162,13 @@ function removePopularCharacter(char: Character) {
   });
 }
 
-function isRealmEmpty(): Boolean {
-  let character = realm.objects('Character');
-  global.LOG('length', character.length <= 0);
-  return character.length <= 0;
+function getPopularCharactersInRealm() {
+  var result = new Array();
+  let characters = realm.objects('Character');
+  for(var index=0; index<characters.length; index++) {
+    result.push(parseRealmObject(characters[index]));
+  }
+  return result;
 }
 
-module.exports = {writeCharacterToRealm, getCharacterFromRealm, isPopularCharacter, removePopularCharacter, isRealmEmpty};
+module.exports = {writeCharacterToRealm, getCharacterFromRealm, isPopularCharacter, removePopularCharacter, getPopularCharactersInRealm};
