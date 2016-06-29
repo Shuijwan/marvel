@@ -27,19 +27,6 @@ class MarvelAPI {
       }
   }
 
-  async getCharacterDetail(url: string) {
-    var generalParam = getMarvelRequestParam();
-    var request = `${url}?${generalParam}`;
-    global.LOG(request);
-    try {
-      let response = await fetch(request);
-      const result = await response.json();
-      global.LOG(result);
-    } catch(error) {
-      global.LOG(error);
-    }
-  }
-
   async searchCharacterByName(startWith: string): Array<Character> {
     var generalParam = getMarvelRequestParam();
     var request = `${serverUrl}characters?nameStartsWith=${startWith}&${generalParam}`;
@@ -162,6 +149,32 @@ class MarvelAPI {
       series: series,
       urls: urls,
     };
+  }
+
+  async getDetail(url: string): string {
+    var generalParam = getMarvelRequestParam();
+    var request = `${url}?${generalParam}`;
+    try {
+      let response = await fetch(request);
+      const result = await response.json();
+      if(result.code === 200) {
+        var results = result.data.results[0];
+        var urlsitems = results.urls;
+        var detailUrl;
+        urlsitems.map((item, index) => {
+          if(item.type === 'detail') {
+            detailUrl = item.url;
+          }
+        });
+
+        return detailUrl;
+      }
+
+    } catch(error) {
+      global.LOG(error, request);
+    }
+
+    return request;
   }
 }
 

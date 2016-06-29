@@ -33,7 +33,7 @@ function clearSearchResult() {
 }
 
 async function getCharacterDetail(url: string) {
-  const result = await marvel.getCharacterDetail(url);
+  const result = await marvel.getDetail(url);
   return {
     type: 'GET_CHARACTER_DETAIL',
     data: result

@@ -20,7 +20,7 @@ var MarvelHeader = require('MarvelHeader');
 var TouchableHighlight = require('TouchableHighlight');
 var {connect} = require('react-redux');
 
-var {markAsPopularCharacter} = require('../../actions');
+var {markAsPopularCharacter, getCharacterDetail} = require('../../actions');
 
 import Hyperlink from 'react-native-hyperlink';
 
@@ -29,6 +29,12 @@ class CharacterDetailView extends React.Component {
     super(props);
     this.handleIconClicked = this.handleIconClicked.bind(this);
 
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.detailUrl) {
+      Linking.openURL(nextProps.detailUrl)
+    }
   }
 
   render() {
@@ -113,10 +119,8 @@ class CharacterDetailView extends React.Component {
           break;
       }
       var contentlayout = content.map((item, index) => {
-            var generalParam = getMarvelRequestParam();
-            var url = `${item.resourceURI}?${generalParam}`;
             var key = `${item.name}-item-${index}`;
-            return (<Text key={key} style={styles.bodyItem} onPress={() => Linking.openURL(url)} > { item.name } </Text>);
+            return (<Text key={key} style={styles.bodyItem} onPress={() =>{ this.props.dispatch(getCharacterDetail(item.resourceURI))}} > { item.name } </Text>);
         }
       );
       var key = `${item.name}-item-${index}`;
@@ -234,4 +238,10 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = connect()(CharacterDetailView);
+function select(store) {
+    return {
+      detailUrl: store.marvel.detailUrl,
+    };
+}
+
+module.exports = connect(select)(CharacterDetailView);

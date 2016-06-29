@@ -10,7 +10,7 @@ import type {Character} from '../marvelapi/model';
 export type State = {
   popularcharacters: Array<Character>;
   searchResult: Array<Character>;
-  characterDetail: string;
+  detailUrl: string;
 };
 
 const initialState: State = {popularcharacters: null, searchResult: null};
@@ -24,9 +24,9 @@ function marvel(state: State = initialState, action: Action): State {
   }
 
   if(action.type === 'GET_CHARACTER_DETAIL') {
-    return {...state, characterDetail: action.data};
+    return {...state, detailUrl: action.data};
   }
-  
+
   return state;
 }
 
