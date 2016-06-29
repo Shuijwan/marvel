@@ -14,8 +14,13 @@ var Text = require('Text');
 var Linking = require('Linking');
 var ScrollView = require('ScrollView');
 var {getMarvelRequestParam} = require('../../marvelapi/Util');
+var {isPopularCharacter, writeCharacterToRealm } = require('../../marvelapi/realmModel');
 var Platform = require('Platform');
 var MarvelHeader = require('MarvelHeader');
+var TouchableHighlight = require('TouchableHighlight');
+var {connect} = require('react-redux');
+
+var {markAsPopularCharacter} = require('../../actions');
 
 import Hyperlink from 'react-native-hyperlink';
 
@@ -45,15 +50,26 @@ class CharacterDetailView extends React.Component {
       head = <MarvelHeader title={this.props.character.name} foreground='dark' style={{backgroundColor: 'rgb(18, 134, 117)'}}/>
     }
 
+    var isPopular;
+    var star = require('../img/unstar.png');
+    if(isPopular = isPopularCharacter(this.props.character)) {
+      star = require('../img/star.png');
+    }
+
     return (
       <View style={styles.container}>
         {head}
         <View style={styles.head}>
           <Image style={styles.img} source={{uri: this.props.character.portraitImg}} />
           <View style={{flexDirection: 'column'}} >
-            <Text style={styles.title}>
-              {this.props.character.name}
-            </Text>
+            <View style={{flexDirection: 'row', marginTop: 15, marginBottom: 10}}>
+              <Text style={styles.title}>
+                {this.props.character.name}
+              </Text>
+              <TouchableHighlight underlayColor={'rgba(255,255,255, 0.2)'} onPress={() => { this.props.dispatch(markAsPopularCharacter(this.props.character, !isPopular)); this.forceUpdate();}}>
+                <Image style={styles.star} source={star} />
+              </TouchableHighlight>
+            </View>
             <Text numberOfLines={3} style={styles.description}>
               {this.props.character.description}
             </Text>
@@ -164,10 +180,11 @@ var styles = StyleSheet.create({
   },
 
   title: {
-    marginTop: 15,
-    marginBottom: 10,
     fontSize: 18,
     fontWeight:'bold',
+    alignItems: 'center',
+    width: 200,
+    justifyContent: 'flex-start',
   },
 
   description: {
@@ -206,7 +223,15 @@ var styles = StyleSheet.create({
     width: undefined,
     height: undefined,
     color: 'blue',
+  },
+
+  star: {
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent:'flex-end',
+    marginRight: 10,
   }
 });
 
-module.exports = CharacterDetailView;
+module.exports = connect()(CharacterDetailView);

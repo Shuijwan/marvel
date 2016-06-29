@@ -26,6 +26,7 @@ function marvel(state: State = initialState, action: Action): State {
   if(action.type === 'GET_CHARACTER_DETAIL') {
     return {...state, characterDetail: action.data};
   }
+  
   return state;
 }
 
