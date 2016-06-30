@@ -17,7 +17,8 @@
   - 显示流行的漫威角色
   - 搜索漫威character, event, story, series
   - IOS 支持
-#IDE
+
+# IDE
   - Nuclide & Visual studio code
 
 # Dev/Libs
