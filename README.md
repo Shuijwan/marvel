@@ -26,4 +26,5 @@
   - react-native-hyperlink
   - crypto-js
   - redux-logger
+  - react-native-share
   
