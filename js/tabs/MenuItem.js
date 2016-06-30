@@ -93,7 +93,6 @@ var styles = StyleSheet.create({
   },
   selectedTitle: {
     color: F8Colors.darkText,
-    fontWeight: 'bold',
   },
   badge: {
     backgroundColor: '#DC3883',
