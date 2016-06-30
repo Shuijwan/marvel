@@ -67,12 +67,12 @@ class CharacterDetailView extends React.Component {
         {head}
         <View style={styles.head}>
           <Image style={styles.img} source={{uri: this.props.character.portraitImg}} />
-          <View style={{flexDirection: 'column'}} >
-            <View style={{flexDirection: 'row', marginTop: 15, marginBottom: 10}}>
+          <View style={{flexDirection: 'column', flex: 1}} >
+            <View style={{flexDirection: 'row', marginTop: 15, marginBottom: 10, justifyContent:'space-between'}}>
               <Text style={styles.title}>
                 {this.props.character.name}
               </Text>
-              <TouchableHighlight underlayColor={'rgba(255,255,255, 0.2)'} onPress={() => { this.props.dispatch(markAsPopularCharacter(this.props.character, !isPopular)); this.forceUpdate();}}>
+              <TouchableHighlight style={{alignItems: 'center', marginRight: 10}} underlayColor={'rgba(255,255,255, 0.2)'} onPress={() => { this.props.dispatch(markAsPopularCharacter(this.props.character, !isPopular)); this.forceUpdate();}}>
                 <Image style={styles.star} source={star} />
               </TouchableHighlight>
             </View>
@@ -81,7 +81,7 @@ class CharacterDetailView extends React.Component {
             </Text>
             <View style={{flex: 1}}/>
             <Hyperlink linkStyle={{color:'#2980b9'}} onPress={(url) => Linking.openURL(url)}>
-              <Text style={styles.wiki}>
+              <Text style={styles.wiki} numberOfLines={1}>
                   {'More: '+ this.props.character.wiki}
               </Text>
             </Hyperlink>
@@ -188,7 +188,7 @@ var styles = StyleSheet.create({
     fontWeight:'bold',
     alignItems: 'center',
     width: 200,
-    justifyContent: 'flex-start',
+    flex: 1,
   },
 
   description: {
@@ -230,11 +230,8 @@ var styles = StyleSheet.create({
   },
 
   star: {
-    width: 32,
-    height: 32,
-    alignItems: 'center',
-    justifyContent:'flex-end',
-    marginRight: 10,
+    width: 24,
+    height: 24,
   }
 });
 
