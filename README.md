@@ -17,14 +17,17 @@
   - 显示流行的漫威角色
   - 搜索漫威character, event, story, series
   - IOS 支持
+#IDE
+  - Nuclide & Visual studio code
 
-# Libs
+# Dev/Libs
   - F8 app
   - Realm
   - react-redux
   - react-native-action-button
   - react-native-hyperlink
-  - crypto-js
+  - crypto-js 
   - redux-logger
   - react-native-share
+  - flow
   
