@@ -101,7 +101,7 @@ class CharacterDetailView extends React.Component {
   }
 
   renderBody() {
-    var body= new Array('Comics', 'Events', 'Series', 'Stories');
+    var body= ['Comics', 'Events', 'Series', 'Stories'];
     var bodyLayout = body.map((item, index) => {
       var content;
       switch(index) {
@@ -123,7 +123,7 @@ class CharacterDetailView extends React.Component {
             return (<Text key={key} style={styles.bodyItem} onPress={() =>{ this.props.dispatch(getCharacterDetail(item.resourceURI))}} > { item.name } </Text>);
         }
       );
-      var key = `${item.name}-item-${index}`;
+      var key = `${item}-item-${index}`;
 
       return (
         <View key={key} style={{flexDirection: 'column', marginVertical: 10}}>

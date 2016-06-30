@@ -19,6 +19,7 @@ var {windowWidth} = require('constant');
 var Platform = require('Platform');
 
 import ActionButton from 'react-native-action-button';
+import type {Character} from '../../marvelapi/model';
 
 var batman = require('../img/batmancolor.png');
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});

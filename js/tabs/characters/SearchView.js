@@ -19,6 +19,8 @@ var ProgressBar = require('ActivityIndicator');
 var ToastAndroid = require('ToastAndroid');
 var Platform = require('Platform');
 
+import type {Character} from '../../marvelapi/model';
+
 var {searchCharacterByName, clearSearchResult} = require('../../actions');
 
 import TimerMixin from 'react-timer-mixin';
@@ -29,6 +31,10 @@ var timerId = 0;
 var titleBarBackgroundColor = Platform.OS === 'android' ? 'rgb(18, 134, 117)' : 'rgb(23, 96, 157)';
 
 class SearchView extends React.Component {
+  state: {
+    isSearching: boolean;
+    searchText: string;
+  };
 
   constructor(props) {
     super(props);
@@ -37,7 +43,7 @@ class SearchView extends React.Component {
     this.renderRow = this.renderRow.bind(this);
     this.state = {
       isSearching: false,
-      searchText: null,
+      searchText: "",
     }
   }
 
