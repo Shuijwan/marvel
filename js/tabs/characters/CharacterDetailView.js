@@ -72,7 +72,7 @@ class CharacterDetailView extends React.Component {
               <Text style={styles.title}>
                 {this.props.character.name}
               </Text>
-              <TouchableHighlight style={{alignItems: 'center', marginRight: 10}} underlayColor={'rgba(255,255,255, 0.2)'} onPress={() => { this.props.dispatch(markAsPopularCharacter(this.props.character, !isPopular)); this.forceUpdate();}}>
+              <TouchableHighlight style={{width: 32, height: 32, alignItems: 'center', marginRight: 10}} underlayColor={'rgba(255,255,255, 0.2)'} onPress={() => { this.props.dispatch(markAsPopularCharacter(this.props.character, !isPopular)); this.forceUpdate();}}>
                 <Image style={styles.star} source={star} />
               </TouchableHighlight>
             </View>
