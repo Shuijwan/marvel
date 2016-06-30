@@ -37,6 +37,7 @@ class SearchView extends React.Component {
     this.renderRow = this.renderRow.bind(this);
     this.state = {
       isSearching: false,
+      searchText: null,
     }
   }
 
@@ -57,16 +58,17 @@ class SearchView extends React.Component {
   }
 
   render() {
-
-    global.LOG('result', this.props.result);
+    var empty;
     if(this.props.result !== null && this.props.result.length > 0) {
       ds = ds.cloneWithRows(this.props.result);
+      empty = false;
     } else {
       ds = ds.cloneWithRows([]);
+      empty = true;
     }
 
     var progress;
-    var list;
+    var content;
     var back;
     if(Platform.OS === 'android') {
       back =   <TouchableHighlight underlayColor='transparent' onPress={this.handleBackPressed}>
@@ -74,32 +76,43 @@ class SearchView extends React.Component {
         </TouchableHighlight>
     }
 
+    var input =     <TextInput
+          ref="searchBox"
+          placeholder="Search the hero"
+          style={styles.search}
+          onChangeText={this.onChangeText}
+          />
+
     if(this.state.isSearching) {
       progress = <ProgressBar style={{marginTop: 20}} color={titleBarBackgroundColor} size="large"/>;
     } else {
-      list = <ListView
-        style={{flex:1, width: undefined, height: undefined}}
-        dataSource={ds}
-        renderRow={this.renderRow}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-        enableEmptySections
-      />
+      if(empty) {
+        if(this.state.searchText === null || this.state.searchText.length === 0) {
+          content = <Text style={styles.content}>Type the Hero name to search</Text>
+        } else {
+          content = <Text style={styles.content}>Not Found</Text>
+        }
+      } else {
+        content = <ListView
+          style={{flex:1, width: undefined, height: undefined}}
+          dataSource={ds}
+          renderRow={this.renderRow}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
+          enableEmptySections
+        />
+      }
     }
 
     return (
-      <View style={{flex:1, flexDirection:'column',}}>
+      <View style={{flex:1, flexDirection:'column'}} >
         <View style={{backgroundColor: titleBarBackgroundColor, height: 25}}
         />
         <View style={styles.toolbar}>
           {back}
-          <TextInput
-            placeholder="Search the hero"
-            style={styles.search}
-            onChangeText={this.onChangeText}
-            />
+          {input}
         </View>
         {progress}
-        {list}
+        {content}
       </View>
     );
   }
@@ -140,15 +153,18 @@ class SearchView extends React.Component {
   }
 
   searchCharacter(name: string) {
+
     if(name.length > 0) {
       this.props.dispatch(searchCharacterByName(name));
       this.setState({
-        isSearching: true
+        isSearching: true,
+        searchText: name,
       });
     } else {
       this.props.dispatch(clearSearchResult());
       this.setState({
-        isSearching: false
+        isSearching: false,
+        searchText: name,
       });
     }
   }
@@ -177,6 +193,13 @@ var styles = StyleSheet.create({
     color: 'white',
     marginLeft: 20,
   },
+
+  content: {
+    fontSize: 18,
+    alignSelf: 'center',
+    marginTop: 150,
+  },
+
   row: {
     marginLeft: 10,
     marginRight: 10,
