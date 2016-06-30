@@ -16,6 +16,7 @@
     "react-native-action-button":"~1.1.5",
     "react-native-hyperlink":"~0.0.5",
     "react-timer-mixin":"~0.13.3",
-    "realm":"~0.13.2"
+    "realm":"~0.13.2",
+    "react-native-share":"~1.0.11"
   }
 }

@@ -17,6 +17,7 @@ var MarvelHeader = require('MarvelHeader');
 var Platform = require('Platform');
 
 import Hyperlink from 'react-native-hyperlink';
+import Share from 'react-native-share';
 
 
 const shield = require('../img/shieldcolor.png');
@@ -26,10 +27,21 @@ class AboutContentView extends React.Component {
   constructor(props) {
     super(props);
     this.handleIconClicked = this.handleIconClicked.bind(this);
+    this.onShare = this.onShare.bind(this);
   }
 
   handleIconClicked() {
     this.context.openDrawer();
+  }
+
+  onShare() {
+    Share.open({
+          share_text: "漫威React Native APP",
+          share_URL: "https://github.com/Shuijwan/marvel",
+          title: "漫威"
+        }, (e) => {
+
+    });
   }
 
   render() {
@@ -79,6 +91,12 @@ class AboutContentView extends React.Component {
             </Hyperlink>
           </View>
         </F8Touchable>
+        <F8Touchable style={{width: 64, height: 64}} onPress={this.onShare}>
+          <View style={{flexDirection:'row'}}>
+            <Text style={styles.itemtext}>Share</Text>
+            <Image style={styles.share} source={require('../img/share.png')}/>
+          </View>
+        </F8Touchable>
         <View style={{flex:1}}/>
         <MarvelInfoView />
       </View>
@@ -122,6 +140,13 @@ var styles = StyleSheet.create({
     marginRight: -1,
     borderRightColor: 'transparent',
   },
+
+  share: {
+     width: 32,
+     height: 32,
+     alignSelf:'center',
+     marginLeft: 10,
+   }
 });
 
 module.exports = AboutContentView;
