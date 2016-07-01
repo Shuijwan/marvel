@@ -8,7 +8,6 @@ var MarvelApp = require('MarvelApp');
 var React = require('react');
 var {Provider} = require('react-redux');
 var configureStore = require('./store/configureStore');
-var {PublicKey} = require('./env');
 
 function setup() : React.Component {
   class Root extends React.Component {

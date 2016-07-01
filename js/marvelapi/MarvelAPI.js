@@ -15,18 +15,7 @@ var Platform = require('Platform');
 import type {Character} from './model';
 
 class MarvelAPI {
-  async getAllCharacters(offset: number, limit: number) {
-      var param = getMarvelRequestParam();
-      var request = `${serverUrl}characters?${param}`;
-      try {
-        let response = await fetch(request);
-        const result = await response.json();
-        global.LOG(result);
-      } catch(error) {
-        global.LOG(error);
-      }
-  }
-
+  
   async searchCharacterByName(startWith: string): Promise<Array<Character>> {
     var generalParam = getMarvelRequestParam();
     var request = `${serverUrl}characters?nameStartsWith=${startWith}&${generalParam}`;
