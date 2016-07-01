@@ -19,20 +19,28 @@ var Platform = require('Platform');
 var MarvelHeader = require('MarvelHeader');
 var TouchableHighlight = require('TouchableHighlight');
 var {connect} = require('react-redux');
+var ActivityIndicator = require('ActivityIndicator');
 
 var {markAsPopularCharacter, getCharacterDetail} = require('../../actions');
 
 import Hyperlink from 'react-native-hyperlink';
 
 class CharacterDetailView extends React.Component {
+  state: {
+    isLoading: boolean;
+  };
+
   constructor(props) {
     super(props);
     this.handleIconClicked = this.handleIconClicked.bind(this);
-
+    this.state = {
+      isLoading: false,
+    };
   }
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.detailUrl) {
+       this.setState({isLoading: false});
       Linking.openURL(nextProps.detailUrl)
     }
   }
@@ -62,6 +70,11 @@ class CharacterDetailView extends React.Component {
       star = require('../img/star.png');
     }
 
+    var loading;
+    if(this.state.isLoading) {
+      loading =  <ActivityIndicator style={styles.loading}/>;
+    }
+
     return (
       <View style={styles.container}>
         {head}
@@ -72,7 +85,7 @@ class CharacterDetailView extends React.Component {
               <Text style={styles.title}>
                 {this.props.character.name}
               </Text>
-              <TouchableHighlight style={{width: 32, height: 32, alignItems: 'center', marginRight: 10}} underlayColor={'rgba(255,255,255, 0.2)'} onPress={() => { this.props.dispatch(markAsPopularCharacter(this.props.character, !isPopular)); this.forceUpdate();}}>
+              <TouchableHighlight style={{width: 32, height: 32, alignItems: 'center', marginRight: 10}} underlayColor={'rgba(255,255,255, 0.2)'} onPress={() => {this.props.dispatch(markAsPopularCharacter(this.props.character, !isPopular)); this.forceUpdate();}}>
                 <Image style={styles.star} source={star} />
               </TouchableHighlight>
             </View>
@@ -92,6 +105,7 @@ class CharacterDetailView extends React.Component {
           {this.renderBody()}
         </View>
         </ScrollView>
+        {loading}
       </View>
     );
   }
@@ -120,7 +134,7 @@ class CharacterDetailView extends React.Component {
       }
       var contentlayout = content.map((item, index) => {
             var key = `${item.name}-item-${index}`;
-            return (<Text key={key} style={styles.bodyItem} onPress={() =>{ this.props.dispatch(getCharacterDetail(item.resourceURI))}} > { item.name } </Text>);
+            return (<Text key={key} style={styles.bodyItem} onPress={() =>{ this.setState({isLoading: true}); this.props.dispatch(getCharacterDetail(item.resourceURI))}} > { item.name } </Text>);
         }
       );
       var key = `${item}-item-${index}`;
@@ -232,7 +246,17 @@ var styles = StyleSheet.create({
   star: {
     width: 24,
     height: 24,
-  }
+  }, 
+
+  loading: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    top: 0,
+    backgroundColor: 'transparent',
+    alignSelf: 'center',
+  },
 });
 
 function select(store) {
