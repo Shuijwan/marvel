@@ -35,6 +35,10 @@ class SearchView extends React.Component {
     searchText: string;
   };
 
+  handleBackPressed: () => void;
+  onChangeText: (text: string) => void;
+  renderRow: (rowData: any, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) => React.Element<View>;
+
   constructor(props) {
     super(props);
     this.handleBackPressed = this.handleBackPressed.bind(this);

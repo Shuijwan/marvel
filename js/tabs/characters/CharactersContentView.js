@@ -26,7 +26,10 @@ var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class CharactersContentView extends React.Component {
 
-  constructor(props) {
+  handleIconClicked: () => void;
+  renderRow: (rowData: any, sectionID: number, rowID: number, highlightRow: (sectionID: number, rowID: number) => void) => React.Element<View>;
+
+  constructor(props: any) {
     super(props);
     this.handleIconClicked = this.handleIconClicked.bind(this);
     this.renderRow = this.renderRow.bind(this);

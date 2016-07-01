@@ -23,7 +23,9 @@ import Share from 'react-native-share';
 const shield = require('../img/shieldcolor.png');
 
 class AboutContentView extends React.Component {
-
+  handleIconClicked: () => void;
+  onShare: () => void;
+  
   constructor(props: any) {
     super(props);
     this.handleIconClicked = this.handleIconClicked.bind(this);

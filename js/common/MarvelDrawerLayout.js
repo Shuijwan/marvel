@@ -30,6 +30,11 @@ var DrawerLayoutAndroid = require('DrawerLayoutAndroid');
 
 class MarvelDrawerLayout extends React.Component {  
   _drawer: ?DrawerLayoutAndroid;
+  openDrawer: () => void;
+  onDrawerOpen: () => void;
+  closeDrawer: () => void;
+  onDrawerClose: () => void;
+  handleBackButton: () => void;
 
   constructor(props: any, context: any) {
     super(props, context);

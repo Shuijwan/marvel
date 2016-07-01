@@ -30,6 +30,8 @@ class CharacterDetailView extends React.Component {
     isLoading: boolean;
   };
 
+  handleIconClicked: () => void;
+
   constructor(props) {
     super(props);
     this.handleIconClicked = this.handleIconClicked.bind(this);

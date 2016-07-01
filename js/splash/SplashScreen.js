@@ -18,12 +18,14 @@ class SplashScreen extends React.Component {
     anim: Animated.Value;
   };
 
+  onAnimatedCompleted: () => void;
+
   constructor(props) {
     super(props);
     this.state = {
       anim : new Animated.Value(0),
     };
-
+    
     this.onAnimatedCompleted = this.onAnimatedCompleted.bind(this);
   }
 
