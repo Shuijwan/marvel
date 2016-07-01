@@ -3,6 +3,8 @@
 */
 
 'use strict';
+import type {Character} from './model';
+
 var Realm = require('realm');
 
 const ComicSchema = {
@@ -97,7 +99,7 @@ function writeCharacterToRealm(character: Character) {
   });
 }
 
-function getCharacterFromRealm(name: string): Character {
+function getCharacterFromRealm(name: string): ?Character {
 
   var query = `name = "${name}"`;
   let character = realm.objects('Character').filtered(query);
