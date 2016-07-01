@@ -24,7 +24,7 @@ const shield = require('../img/shieldcolor.png');
 
 class AboutContentView extends React.Component {
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.handleIconClicked = this.handleIconClicked.bind(this);
     this.onShare = this.onShare.bind(this);

@@ -16,7 +16,6 @@ var ListView = require('ListView');
 var RecyclerViewBackedScrollView = require('RecyclerViewBackedScrollView');
 var {windowWidth} = require('constant');
 var ProgressBar = require('ActivityIndicator');
-var ToastAndroid = require('ToastAndroid');
 var Platform = require('Platform');
 
 import type {Character} from '../../marvelapi/model';
@@ -55,12 +54,6 @@ class SearchView extends React.Component {
     this.setState({
       isSearching: false
     });
-
-    if(Platform.OS === 'android') {
-      if(nextProps.result !== null && nextProps.result.length == 0) {
-        ToastAndroid.show('Not Found', ToastAndroid.SHORT);
-      }
-    }
   }
 
   render() {
