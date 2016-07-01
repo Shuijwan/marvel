@@ -137,7 +137,7 @@ class CharacterDetailView extends React.Component {
             return (<Text key={key} style={styles.bodyItem} onPress={() =>{ this.setState({isLoading: true}); this.props.dispatch(getCharacterDetail(item.resourceURI))}} > { item.name } </Text>);
         }
       );
-      var key = `${item}-item-${index}`;
+      var key = `${item}`;
 
       return (
         <View key={key} style={{flexDirection: 'column', marginVertical: 10}}>
