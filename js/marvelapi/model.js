@@ -8,7 +8,7 @@ export type Character = {
   id: number;
   name: string;
   description: string;
-  wiki: string;
+  wiki: ?string;
   thumbnail: string;
   portraitImg: string;
   comics: Array<Comic>;
