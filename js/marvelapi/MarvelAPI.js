@@ -27,10 +27,10 @@ class MarvelAPI {
       }
   }
 
-  async searchCharacterByName(startWith: string): Array<Character> {
+  async searchCharacterByName(startWith: string): Promise<Array<Character>> {
     var generalParam = getMarvelRequestParam();
     var request = `${serverUrl}characters?nameStartsWith=${startWith}&${generalParam}`;
-    var result = new Array();
+    var result = [];
     try {
       let response = await fetch(request);
       const responseJson = await response.json();
@@ -52,10 +52,10 @@ class MarvelAPI {
     return result;
   }
 
-  async getPopularCharacters(): Array<Character> {
-    var result = new Array();
-    var populars = new Array('Spider-Man','Hulk', 'Captain America','Iron Man','Avengers','X-Men', 'Deadpool', 'Guardians of the Galaxy');
-    var charactersInRealm = getPopularCharactersInRealm();
+  async getPopularCharacters(): Promise<Array<Character>> {
+    var result = [];
+    var populars = ['Spider-Man','Hulk', 'Captain America','Iron Man','Avengers','X-Men', 'Deadpool', 'Guardians of the Galaxy'];
+    var charactersInRealm = await getPopularCharactersInRealm();
     if(charactersInRealm && charactersInRealm.length > 0) {
       return charactersInRealm;
     }
@@ -65,14 +65,16 @@ class MarvelAPI {
         result.push(realmCharacter);
       } else {
         var data = await this.getCharacterByName(populars[index]);
-        result.push(data);
-        writeCharacterToRealm(data);
+        if(data) {
+          result.push(data);
+          writeCharacterToRealm(data);
+        }
       }
     }
     return result;
   }
 
-  async getCharacterByName(name: string): Character {
+  async getCharacterByName(name: string): Promise<?Character> {
     var generalParam = getMarvelRequestParam();
     var request = `${serverUrl}characters?${generalParam}&name=${name}`;
     try {
@@ -90,7 +92,7 @@ class MarvelAPI {
     return null;
   }
 
-  parseCharacter(data: string): Character {
+  parseCharacter(data: Object): Character {
     var name = data.name;
     var id = data.id;
     var description = data.description;
@@ -102,25 +104,25 @@ class MarvelAPI {
     var thumbnail = `${serverPath}/standard_medium.${data.thumbnail.extension}`;
     var portraitImg = `${serverPath}/portrait_xlarge.${data.thumbnail.extension}`;
 
-    var comics = new Array();
+    var comics = [];
     var comicsitems = data.comics.items;
     comicsitems.map((item, index) => {
       comics.push(item);
     });
 
-    var events = new Array();
+    var events = [];
     var eventsitems = data.events.items;
     eventsitems.map((item, index) => {
       events.push(item);
     });
 
-    var stories = new Array();
+    var stories = [];
     var storiesitems = data.stories.items;
     storiesitems.map((item, index) => {
       stories.push(item);
     });
 
-    var urls = new Array();
+    var urls = [];
     var urlsitems = data.urls;
     var wiki;
     urlsitems.map((item, index) => {
@@ -130,7 +132,7 @@ class MarvelAPI {
       urls.push(item);
     });
 
-    var series = new Array();
+    var series = [];
     var seriesitems = data.series.items;
     seriesitems.map((item, index) => {
       series.push(item);
@@ -151,7 +153,7 @@ class MarvelAPI {
     };
   }
 
-  async getDetail(url: string): string {
+  async getDetail(url: string): Promise<string> {
     var generalParam = getMarvelRequestParam();
     var request = `${url}?${generalParam}`;
     try {

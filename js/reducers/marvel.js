@@ -8,12 +8,12 @@ import type {Action} from '../actions/types';
 import type {Character} from '../marvelapi/model';
 
 export type State = {
-  popularcharacters: Array<Character>;
-  searchResult: Array<Character>;
-  detailUrl: string;
+  popularcharacters: ?Array<Character>;
+  searchResult: ?Array<Character>;
+  detailUrl: ?string;
 };
 
-const initialState: State = {popularcharacters: null, searchResult: null};
+const initialState: State = {popularcharacters: null, searchResult: null, detailUrl: null};
 
 function marvel(state: State = initialState, action: Action): State {
   if (action.type === 'GET_POPULAR_CHARACTERS') {

@@ -162,8 +162,8 @@ function removePopularCharacter(char: Character) {
   });
 }
 
-function getPopularCharactersInRealm() {
-  var result = new Array();
+function getPopularCharactersInRealm(): Array<Character> {
+  var result = [];
   let characters = realm.objects('Character');
   for(var index=0; index<characters.length; index++) {
     result.push(parseRealmObject(characters[index]));
