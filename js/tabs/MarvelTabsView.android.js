@@ -27,7 +27,7 @@ class MarvelTabsView extends React.Component {
     tab: Tab;
     navigator: Navigator;
     onTabSelected: (tab: Tab) => void;
-  }
+  };
 
   constructor(props) {
     super(props);

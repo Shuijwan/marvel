@@ -60,6 +60,7 @@ export type Props = {
 };
 
 class F8HeaderAndroid extends React.Component {
+  
   props: Props;
 
   render() {
@@ -238,10 +239,10 @@ var styles = StyleSheet.create({
   },
 });
 
-const Header = Platform.OS === 'ios' ? F8HeaderIOS : F8HeaderAndroid;
-Header.height = HEADER_HEIGHT;
+const MarvelHeader = Platform.OS === 'ios' ? F8HeaderIOS : F8HeaderAndroid;
+MarvelHeader.height = HEADER_HEIGHT;
 
-module.exports = Header;
+module.exports = MarvelHeader;
 module.exports.__cards__ = (define) => {
   const menuItem = {
     title: 'Menu',
@@ -254,39 +255,39 @@ module.exports.__cards__ = (define) => {
     onPress: () => alert('Filter button pressed!'),
   };
 
-  define('Simple', () => <Header title="Hello, world" />);
+  define('Simple', () => <MarvelHeader title="Hello, world" />);
   define('With items', () => (
-    <Header
+    <MarvelHeader
       title="Default"
       leftItem={menuItem}
       rightItem={filterItem}
     />
   ));
   define('Forcing icons', () => (
-    <Header
+    <MarvelHeader
       title="Forcing icons"
       leftItem={{...menuItem, layout: 'icon'}}
       rightItem={{...filterItem, layout: 'icon'}}
     />
   ));
   define('Forcing title', () => (
-    <Header
+    <MarvelHeader
       title="Forcing title"
       leftItem={{...menuItem, layout: 'title'}}
       rightItem={{...filterItem, layout: 'title'}}
     />
   ));
   define('With content', () => (
-    <Header leftItem={menuItem}>
+    <MarvelHeader leftItem={menuItem}>
       <View style={{backgroundColor: '#224488'}}>
         <Text style={{color: 'yellow'}}>
           Yellow text as title
         </Text>
       </View>
-    </Header>
+    </MarvelHeader>
   ));
   define('With Background', () => (
-    <Header
+    <MarvelHeader
       title="With Background"
       leftItem={{...menuItem, layout: 'title'}}
       rightItem={{...filterItem, layout: 'title'}}
@@ -294,7 +295,7 @@ module.exports.__cards__ = (define) => {
     />
   ));
   define('With light background', () => (
-    <Header
+    <MarvelHeader
       title="Light Background"
       leftItem={{...menuItem, layout: 'title'}}
       rightItem={{...filterItem, layout: 'title'}}

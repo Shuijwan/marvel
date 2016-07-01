@@ -34,7 +34,7 @@ import {
 import React from 'react';
 
 
-function F8TouchableIOS(props: Object): ReactElement {
+function F8TouchableIOS(props: Object): ReactElement<TouchableHighlight> {
   return (
     <TouchableHighlight
       accessibilityTraits="button"

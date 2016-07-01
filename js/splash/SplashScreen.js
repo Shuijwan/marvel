@@ -14,6 +14,10 @@ var View = require('View');
 var { enterMainPage } = require('../actions');
 
 class SplashScreen extends React.Component {
+  state: {
+    anim: Animated.Value;
+  };
+
   constructor(props) {
     super(props);
     this.state = {

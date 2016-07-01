@@ -12,6 +12,11 @@ var {PublicKey} = require('./env');
 
 function setup() : React.Component {
   class Root extends React.Component {
+    state: {
+      store: ?any;
+    };
+
+
     constructor() {
       super();
       this.state = {

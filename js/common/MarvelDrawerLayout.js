@@ -28,7 +28,7 @@
 var React = require('react');
 var DrawerLayoutAndroid = require('DrawerLayoutAndroid');
 
-class MarvelDrawerLayout extends React.Component {
+class MarvelDrawerLayout extends React.Component {  
   _drawer: ?DrawerLayoutAndroid;
 
   constructor(props: any, context: any) {

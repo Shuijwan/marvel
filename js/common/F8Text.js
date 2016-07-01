@@ -31,15 +31,15 @@ import F8Colors from 'F8Colors';
 import React from 'react';
 var Text = require('Text');
 
-export function Text({style, ...props}: Object): ReactElement {
+export function Text({style, ...props}: Object): ReactElement<Text> {
   return <Text style={[styles.font, style]} {...props} />;
 }
 
-export function Heading1({style, ...props}: Object): ReactElement {
+export function Heading1({style, ...props}: Object): ReactElement<Text> {
   return <Text style={[styles.font, styles.h1, style]} {...props} />;
 }
 
-export function Paragraph({style, ...props}: Object): ReactElement {
+export function Paragraph({style, ...props}: Object): ReactElement<Text> {
   return <Text style={[styles.font, styles.p, style]} {...props} />;
 }
 
