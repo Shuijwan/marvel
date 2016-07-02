@@ -15,7 +15,7 @@ var Platform = require('Platform');
 import type {Character} from './model';
 
 class MarvelAPI {
-  
+
   async searchCharacterByName(startWith: string): Promise<Array<Character>> {
     var generalParam = getMarvelRequestParam();
     var request = `${serverUrl}characters?nameStartsWith=${startWith}&${generalParam}`;
@@ -42,22 +42,19 @@ class MarvelAPI {
   }
 
   async getPopularCharacters(): Promise<Array<Character>> {
-    var result = [];
+
     var populars = ['Spider-Man','Hulk', 'Captain America','Iron Man','Avengers','X-Men', 'Deadpool', 'Guardians of the Galaxy'];
     var charactersInRealm = await getPopularCharactersInRealm();
     if(charactersInRealm && charactersInRealm.length > 0) {
       return charactersInRealm;
     }
+
+    var result = [];
     for(var index=0; index<populars.length; index++) {
-      var realmCharacter = await getCharacterFromRealm(populars[index]);
-      if(realmCharacter) {
-        result.push(realmCharacter);
-      } else {
-        var data = await this.getCharacterByName(populars[index]);
-        if(data) {
-          result.push(data);
-          writeCharacterToRealm(data);
-        }
+      var data = await this.getCharacterByName(populars[index]);
+      if(data) {
+        result.push(data);
+        writeCharacterToRealm(data);
       }
     }
     return result;
