@@ -50,17 +50,17 @@ export type Item = {
 };
 
 export type Props = {
-  title: string;
+  title?: string;
   leftItem?: Item;
   rightItem?: Item;
   extraItems?: Array<Item>;
   foreground?: Foreground;
-  style: any;
-  children: any;
+  style?: any;
+  children?: any;
 };
 
 class F8HeaderAndroid extends React.Component {
-  
+
   props: Props;
 
   render() {
