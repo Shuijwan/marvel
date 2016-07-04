@@ -83,10 +83,7 @@ class MarvelAPI {
     var id = data.id;
     var description = data.description;
     var serverPath = data.thumbnail.path;
-    if(Platform.OS === 'ios') {
-      serverPath = serverPath.substring(4, serverPath.length);
-      serverPath = `https${serverPath}`;
-    }
+    
     var thumbnail = `${serverPath}/standard_medium.${data.thumbnail.extension}`;
     var portraitImg = `${serverPath}/portrait_xlarge.${data.thumbnail.extension}`;
 
