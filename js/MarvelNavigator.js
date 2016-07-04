@@ -15,7 +15,7 @@ var CharacterDetailView = require('./tabs/characters/CharacterDetailView');
 var SearchView = require('./tabs/characters/SearchView');
 var Platform = require('Platform');
 
-var that;
+var self;
 
 class MarvelNavigator extends React.Component {
 
@@ -24,7 +24,7 @@ class MarvelNavigator extends React.Component {
   constructor(props) {
     super(props);
     this._backHandlers = [];
-    that = this;
+    self = this;
   }
 
   componentDidMount() {
@@ -47,21 +47,21 @@ class MarvelNavigator extends React.Component {
   }
 
   addBackButtonListener(listener) {
-    that._backHandlers.push(listener);
+    self._backHandlers.push(listener);
   }
 
   removeBackButtonListener(listener) {
-    that._backHandlers = that._backHandlers.filter((handler) => handler !== listener);
+    self._backHandlers = self._backHandlers.filter((handler) => handler !== listener);
   }
 
   handleBackPressed() {
-    for(let i=that._backHandlers.length-1; i>=0; i--) {
-      if(that._backHandlers[i]()) {
+    for(let i=self._backHandlers.length-1; i>=0; i--) {
+      if(self._backHandlers[i]()) {
         return true;
       }
     }
 
-    var navigator = that.refs.navigator;
+    var navigator = self.refs.navigator;
     if(navigator && navigator.getCurrentRoutes().length > 1) {
       navigator.pop();
       return true;
