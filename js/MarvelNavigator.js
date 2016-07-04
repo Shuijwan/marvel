@@ -15,53 +15,62 @@ var CharacterDetailView = require('./tabs/characters/CharacterDetailView');
 var SearchView = require('./tabs/characters/SearchView');
 var Platform = require('Platform');
 
-var MarvelNavigator = React.createClass({
-  _backHandlers: ([]: Array<() => boolean>),
+var that;
 
-  componentDidMount: function() {
+class MarvelNavigator extends React.Component {
+
+  _backHandlers: Array<() => boolean>;
+
+  constructor(props) {
+    super(props);
+    this._backHandlers = [];
+    that = this;
+  }
+
+  componentDidMount() {
     if(Platform.OS === 'android') {
       BackAndroid.addEventListener('hardwareBackPress', this.handleBackPressed);
     }
-  },
+  }
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     if(Platform.OS === 'android') {
       BackAndroid.removeEventListener('hardwareBackPress', this.handleBackPressed);
     }
-  },
+  }
 
   getChildContext() {
     return {
       addBackButtonListener: this.addBackButtonListener,
       removeBackButtonListener: this.removeBackButtonListener,
     };
-  },
+  }
 
-  addBackButtonListener: function(listener) {
-    this._backHandlers.push(listener);
-  },
+  addBackButtonListener(listener) {
+    that._backHandlers.push(listener);
+  }
 
-  removeBackButtonListener: function(listener) {
-    this._backHandlers = this._backHandlers.filter((handler) => handler !== listener);
-  },
+  removeBackButtonListener(listener) {
+    that._backHandlers = that._backHandlers.filter((handler) => handler !== listener);
+  }
 
-  handleBackPressed: function() {
-    for(let i=this._backHandlers.length-1; i>=0; i--) {
-      if(this._backHandlers[i]()) {
+  handleBackPressed() {
+    for(let i=that._backHandlers.length-1; i>=0; i--) {
+      if(that._backHandlers[i]()) {
         return true;
       }
     }
 
-    var navigator = this.refs.navigator;
+    var navigator = that.refs.navigator;
     if(navigator && navigator.getCurrentRoutes().length > 1) {
       navigator.pop();
       return true;
     }
 
     return false;
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <Navigator
         ref="navigator"
@@ -82,9 +91,9 @@ var MarvelNavigator = React.createClass({
       />
 
     );
-  },
+  }
 
-  renderScene: function(route, navigator) {
+  renderScene(route, navigator) {
     if(route.character) {
       return (
         <CharacterDetailView navigator={navigator} character={route.character}/>
@@ -100,8 +109,8 @@ var MarvelNavigator = React.createClass({
     return (
       <MarvelTabsView navigator={navigator}/>
     );
-  },
-});
+  }
+}
 
 MarvelNavigator.childContextTypes = {
   addBackButtonListener: React.PropTypes.func,
