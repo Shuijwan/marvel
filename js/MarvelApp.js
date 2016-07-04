@@ -16,23 +16,23 @@ var View = require('View');
 var {connect} = require('react-redux');
 var { getPopularCharacters } = require('./actions');
 
-var MarvelApp = React.createClass({
-  componentDidMount: function() {
+class MarvelApp extends React.Component {
+  componentDidMount() {
     // AppState.addEventListener('change', this.handleAppStateChange);
     this.props.dispatch(getPopularCharacters());
-  },
+  }
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     // AppState.removeEventListener('change', this.handleAppStateChange);
-  },
+  }
 
-  handleAppStateChange: function(appState) {
+  handleAppStateChange(appState) {
     if(appState == 'active') {
 
     }
-  },
+  }
 
-  render: function() {
+  render() {
     if(this.props.inSplash) {
       return <SplashScreen />;
     }
@@ -47,9 +47,8 @@ var MarvelApp = React.createClass({
         <MarvelNavigator />
       </View>
     );
-  },
-
-});
+  }
+}
 
 var styles = StyleSheet.create({
   container:{
