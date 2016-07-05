@@ -44,16 +44,7 @@ class CharactersContentView extends React.Component {
     var head;
 
     if(Platform.OS === 'android') {
-      head =
-        <View style={{flexDirection: 'column'}}>
-          <View style={{backgroundColor:'rgb(18, 134, 117)', height: 25}}/>
-          <ToolbarAndroid
-            title='CHARACTERS'
-            titleColor='white'
-            navIcon={batman}
-            style={styles.toolbar}
-            onIconClicked= {this.handleIconClicked}/>
-        </View>
+      head = <MarvelHeader title={'CHARACTERS'} leftItem={{icon: batman, onPress: this.handleIconClicked}} foreground='light' style={{backgroundColor: 'rgb(18, 134, 117)'}}/>
 
       actionButton = <ActionButton
         buttonColor="rgb(18, 134, 117)"

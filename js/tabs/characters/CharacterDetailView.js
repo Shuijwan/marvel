@@ -50,18 +50,7 @@ class CharacterDetailView extends React.Component {
   render() {
     var head;
     if(Platform.OS === 'android') {
-      head =
-      <View style={{flexDirection:'column'}}>
-        <View style={{backgroundColor:'rgb(18, 134, 117)', height: 25}}
-        />
-        <ToolbarAndroid
-          title={this.props.character.name}
-          titleColor='white'
-          navIcon={require("../img/back.png")}
-          onIconClicked= {this.handleIconClicked}
-          style={styles.toolbar}
-        />
-      </View>
+      head = <MarvelHeader title={this.props.character.name} leftItem={{icon: require("../img/back.png"), onPress: this.handleIconClicked}} foreground='light' style={{backgroundColor: 'rgb(18, 134, 117)'}}/>
     } else {
       head = <MarvelHeader title={this.props.character.name} foreground='dark' style={{backgroundColor: 'rgb(18, 134, 117)'}}/>
     }
@@ -248,7 +237,7 @@ var styles = StyleSheet.create({
   star: {
     width: 24,
     height: 24,
-  }, 
+  },
 
   loading: {
     position: 'absolute',

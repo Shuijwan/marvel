@@ -25,7 +25,7 @@ const shield = require('../img/shieldcolor.png');
 class AboutContentView extends React.Component {
   handleIconClicked: () => void;
   onShare: () => void;
-  
+
   constructor(props: any) {
     super(props);
     this.handleIconClicked = this.handleIconClicked.bind(this);
@@ -49,18 +49,7 @@ class AboutContentView extends React.Component {
   render() {
     var head;
     if(Platform.OS === 'android') {
-      head =
-      <View style={{flexDirection:'column'}}>
-        <View style={{backgroundColor:'rgb(168, 31, 26)', height: 25}}
-        />
-        <ToolbarAndroid
-          navIcon={shield}
-          title='About'
-          titleColor='white'
-          onIconClicked= {this.handleIconClicked}
-          style={styles.toolbar}
-        />
-      </View>
+      head = <MarvelHeader title={'ABOUT'} leftItem={{icon: shield, onPress: this.handleIconClicked}} foreground='light' style={{backgroundColor: 'rgb(168, 31, 26)'}}/>
     } else {
       head = <MarvelHeader title={'ABOUT'} foreground='dark' style= {{backgroundColor: 'rgb(168, 31, 26)'}}/>;
     }
