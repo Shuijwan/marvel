@@ -33,8 +33,11 @@ class MarvelApp extends React.Component {
   }
 
   render() {
+    var content;
     if(this.props.inSplash) {
-      return <SplashScreen />;
+      content = <SplashScreen />;
+    } else {
+      content = <MarvelNavigator />;
     }
 
     return (
@@ -44,7 +47,7 @@ class MarvelApp extends React.Component {
           backgroundColor="rgba(0,0,0,0.2)"
           barStyle="light-content"
           />
-        <MarvelNavigator />
+        {content}
       </View>
     );
   }
