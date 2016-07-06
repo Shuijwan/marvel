@@ -47,3 +47,5 @@
   - react-native-share
   - flow
   
+# Feedback 
+- feedback or any suggestion is welcome.
